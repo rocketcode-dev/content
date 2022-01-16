@@ -6,8 +6,9 @@ DIR="$(cd "$(dirname "$0")"; pwd -L)"
 set -e
 
 rundate=$(date "+%Y-%m-%d_%H:%M:%S")
+isQuiet=false
 
-if [ ! -e ${DIR}/modules/io.sh ]; then
+if [ ! -e "${DIR}/modules/io.sh" ]; then
   echo "ERROR: no io module. Run the deployment process before proceeding."
   exit 1
 fi
@@ -20,7 +21,7 @@ for i in curl jq json2yaml; do
   fi
 done
 
-if [ ! -e ${DIR}/secrets/${ENV}.sh ]; then
+if [ ! -e "${DIR}/secrets/${ENV}.sh" ]; then
   error "missing secrets. Run the deployment process on env ${ENV} before proceeding."
   exit 1
 fi
@@ -31,9 +32,9 @@ function uploadContent {
 
   local rsyncExclude=''
 
-  h2 "Sending ${DIR}/content/drafts to ${remoteHost}:${remoteDir}"
+  h2 "Sending ${DIR}/content/draft to ${remoteHost}:${remoteDir}"
 
-  rsync -avz -e ssh --stats --progress --delete ${DIR}/content/drafts ${rsyncExclude} \
+  rsync -avz -e ssh --stats --progress --delete ${DIR}/content/draft ${rsyncExclude} \
       ${remoteHost}:${remoteDir}
 
   h2 "Sending ${DIR}/content/ready to ${remoteHost}:${remoteDir}"
@@ -79,8 +80,13 @@ function contentError {
 }
 
 function runPublish {
-  publishResult=$(curl -X POST ${apiEndpoint})
-  
+  echo "isQuiet ${isQuiet}"
+  info "Publishing to ${apiEndpoint}"
+  resultFile=$(mktemp)
+  curl -X POST ${apiEndpoint} -d '' | tee ${resultFile}
 
+  echo RESULT:
+  cat ${resultFile}
+  rm ${resultFile}
 }
 runPublish
