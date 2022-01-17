@@ -5,6 +5,16 @@ ENV=moon
 DIR="$(cd "$(dirname "$0")"; pwd -L)"
 set -e
 
+publisher=$(kubectl get secrets config -o json | \
+  jq -r '.data["secrets-moon.yaml"]' | \
+  base64 -d | yaml2json - | \
+  jq -r '.environment[]|select(.name="moon").config.publisher')
+secret=$(jq -r '.secret' <<< ${publisher})
+if [ -z "${secret}" ]; then
+  echo "Failed to get secret"
+  exit 1;
+fi
+
 rundate=$(date "+%Y-%m-%d_%H:%M:%S")
 isQuiet=false
 
@@ -47,7 +57,6 @@ function uploadContent {
   rsync -avz -e ssh --stats --progress ${DIR}/content/retired ${rsyncExclude} \
       ${remoteHost}:${remoteDir}
 }
-uploadContent
 
 function contentRetired {
   local folder=$1
@@ -82,11 +91,47 @@ function contentError {
 function runPublish {
   echo "isQuiet ${isQuiet}"
   info "Publishing to ${apiEndpoint}"
+  resultFile=/var/folders/4_/s1sj1yln4r39mhgby6h3d41r0000gn/T/tmp.ZJf5mqlU
   resultFile=$(mktemp)
-  curl -X POST ${apiEndpoint} -d '' | tee ${resultFile}
+  curl -k -X POST ${apiEndpoint} -H "X-CapnAjax-Secret: ${secret}" -d '' | tee ${resultFile}
 
   echo RESULT:
-  cat ${resultFile}
+  cat ${resultFile} | jq
+
+  numRecords=$(cat ${resultFile} | jq '.|length')
+
+  for (( i = 0; i < numRecords; i++ )); do
+    record=$(cat ${resultFile} | jq -r '.[$c]' --argjson c ${i})
+
+    h1 RECORD
+    jq <<< ${record}
+
+    contentItemName=$(jq -r '.name'  <<< ${record})
+    action=$(jq -r '.action' <<< ${record})
+    newStatus=$(jq -r '.status' <<< ${record})
+    numFiles=$(jq -r '.files|length' <<< ${record})
+
+    info action: ${action}
+    info new status: ${newStatus}
+
+    for (( j = 0; j < numFiles; j++)); do
+
+      fileRecord=$(jq '.files[$c]' --argjson c ${j} <<< ${record})
+      filename=$(jq -r '.name' <<< ${fileRecord})
+
+      h2 FILE ${filename}
+      jq -r '.content' <<< ${fileRecord} > \
+        content/${action}/${contentItemName}/${filename}
+
+    done
+    
+    mv content/${action}/${contentItemName} \
+      content/${newStatus}
+  done
+
+
   rm ${resultFile}
 }
+
+uploadContent
 runPublish
