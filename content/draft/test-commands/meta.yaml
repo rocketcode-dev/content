@@ -15,5 +15,5 @@ info:
     format: text/plain
     text: 
   article:
-    format: text/yaml
+    format: text/markdown
     file: test-commands.md

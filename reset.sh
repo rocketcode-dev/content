@@ -28,4 +28,12 @@ kubectl exec -i $(kubectl get pods --selector=app=postgres \
 
 kubectl exec -i $(kubectl get pods --selector=app=postgres \
     -o name) -- psql -U postgres --dbname=blog \
+    <<< 'DELETE FROM article_tag;'
+
+kubectl exec -i $(kubectl get pods --selector=app=postgres \
+    -o name) -- psql -U postgres --dbname=blog \
+    <<< 'DELETE FROM tags WHERE important = FALSE;'
+
+kubectl exec -i $(kubectl get pods --selector=app=postgres \
+    -o name) -- psql -U postgres --dbname=blog \
     <<< 'DELETE FROM articles;'
