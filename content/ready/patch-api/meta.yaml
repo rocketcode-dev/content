@@ -11,9 +11,9 @@ article:
 info:
  title: Using Kubernetes APIs to patch a secret
  abstract:
- format: text/markdown
- text: This takes you through the process of creating a service account, giving
-  yourself access, and using the Kubernetes APIs to update a secret.
+  format: text/markdown
+  text: This takes you through the process of creating a service account, giving
+    yourself access, and using the Kubernetes APIs to update a secret.
  article:
- format: text/markdown
- file: patch-api.md
+  format: text/markdown
+  file: patch-api.md

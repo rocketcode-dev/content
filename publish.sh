@@ -24,7 +24,7 @@ if [ ! -e "${DIR}/modules/io.sh" ]; then
 fi
 source ${DIR}/modules/io.sh
 
-for i in curl jq json2yaml; do
+for i in curl jq json2yaml yamllint; do
   info "Testing for ${i}"
   if ! which ${i} >/dev/null; then
     error "Missing required package '${i}'. Install '${i}' before proceeding."
@@ -56,6 +56,17 @@ function uploadContent {
 
   rsync -avz -e ssh --stats --progress ${DIR}/content/retired ${rsyncExclude} \
       ${remoteHost}:${remoteDir}
+}
+
+function validateContent {
+  h1 Prevalidating content
+  for meta in $(find . -name meta.yaml); do
+    if ! yamllint $meta; then
+      echo FAILED to lint ${i}
+      exit 1
+    fi
+  done
+  exit 0
 }
 
 function contentRetired {
@@ -133,5 +144,6 @@ function runPublish {
   rm ${resultFile}
 }
 
+validateContent
 uploadContent
 runPublish
