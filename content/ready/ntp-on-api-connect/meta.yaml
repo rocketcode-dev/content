@@ -13,8 +13,8 @@ info:
   abstract:
     format: text/markdown
     text: When setting up API Connect on OVA, it's common to forget to configure
-    NTP, but this is absolutely critical to keep your API Connect servers
-    stable.
+      NTP, but this is absolutely critical to keep your API Connect servers
+      stable.
   article:
     format: text/markdown
     file: ntp-on-api-connect.md

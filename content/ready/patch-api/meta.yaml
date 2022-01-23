@@ -13,7 +13,7 @@ info:
  abstract:
  format: text/markdown
  text: This takes you through the process of creating a service account, giving
- yourself access, and using the Kubernetes APIs to update a secret.
+  yourself access, and using the Kubernetes APIs to update a secret.
  article:
  format: text/markdown
  file: patch-api.md
