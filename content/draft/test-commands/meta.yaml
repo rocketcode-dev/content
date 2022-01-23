@@ -1,0 +1,19 @@
+article:
+  author: thomas
+  # active_dt: <date to activate -- use this to queue articles>
+  content_type: article
+  tags:
+  - cheat-notes
+  - scripting
+  - Linux
+  permalinks:
+  - test-commands
+
+info:
+  title: "Cheat notes: test commands"
+  abstract:
+    format: text/plain
+    text: 
+  article:
+    format: text/yaml
+    file: test-commands.md

@@ -1,0 +1,19 @@
+article:
+  author: thomas
+  # active_dt: <date to activate -- use this to queue articles>
+  content_type: article
+  tags:
+  - Kubernetes
+  - API
+  - DevOps
+  permalinks:
+  - patch-api
+
+info:
+  title: Pod logs
+  abstract:
+    format: text/markdown
+    text: How to use the Kubernetes API to patch a secret
+  article:
+    format: text/yaml
+    file: patch-api.md

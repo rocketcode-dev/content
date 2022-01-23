@@ -1,0 +1,19 @@
+article:
+ author: thomas
+ content_type: article
+ tags:
+ - cheat-notes
+ - scripting
+ - Linux
+ permalinks:
+ - extended-globbing
+ uuid: ad606100-7c08-11ec-9bec-318d5afe5b98
+info:
+ title: "Cheat notes: extended globbing"
+ abstract:
+ format: text/plain
+ text: Using extended globbing to match more patterns in your shell scripts.
+ article:
+ format: text/markdown
+ file: extended-globbing.md
+
