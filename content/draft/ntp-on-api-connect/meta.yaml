@@ -1,0 +1,18 @@
+article:
+  author: thomas
+  # active_dt: <date to activate -- use this to queue articles>
+  content_type: article
+  tags:
+  - IBM API Connect
+  - NTP
+  permalinks:
+  - ntp-on-api-connect
+
+info:
+  title: NTP on API Connect
+  abstract:
+    format: text/markdown
+    text: When setting up API Connect on OVA, it's common to forget to configure NTP, but this is absolutely critical to keep your API Connect servers stable.
+  article:
+    format: text/yaml
+    file: ntp-on-api-connect.md

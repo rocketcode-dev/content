@@ -1,0 +1,19 @@
+article:
+  author: thomas
+  # active_dt: <date to activate -- use this to queue articles>
+  content_type: article
+  tags:
+  - Kubernetes
+  - script
+  - kubectl
+  permalinks:
+  - pod-logs
+
+info:
+  title: Pod logs
+  abstract:
+    format: text/markdown
+    text: Typing `kubectl logs <pod-name>` is easy enough, when debugging code that runs in k8s, it's annoying to do this every time, correcting the pod name every time. Here's a simple script to make that annoyance go away.
+  article:
+    format: application/x-sh
+    file: podlogs.sh
