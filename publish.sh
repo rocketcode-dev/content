@@ -66,7 +66,6 @@ function validateContent {
       exit 1
     fi
   done
-  exit 0
 }
 
 function contentRetired {
