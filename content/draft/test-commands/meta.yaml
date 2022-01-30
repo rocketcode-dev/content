@@ -1,7 +1,7 @@
 article:
   author: thomas
   # active_dt: <date to activate -- use this to queue articles>
-  content_type: article
+  content_type: cheat
   tags:
   - cheat-notes
   - scripting
@@ -10,7 +10,7 @@ article:
   - test-commands
 
 info:
-  title: "Cheat notes: test commands"
+  title: "Test commands"
   abstract:
     format: text/plain
     text: 

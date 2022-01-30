@@ -1,7 +1,7 @@
 article:
   author: thomas
   # active_dt: <date to activate -- use this to queue articles>
-  content_type: article
+  content_type: script
   tags:
   - Kubernetes
   - script
