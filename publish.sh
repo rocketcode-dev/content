@@ -1,19 +1,22 @@
 #!/bin/bash
 
-ENV=moon
+ENV=$1
+if [ -z "${ENV}" ]; then
+  ENV=moon
+fi
 
 DIR="$(cd "$(dirname "$0")"; pwd -L)"
 set -e
 
-publisher=$(kubectl get secrets config -o json | \
-  jq -r '.data["secrets-moon.yaml"]' | \
-  base64 -d | yaml2json - | \
-  jq -r '.environment[]|select(.name="moon").config.publisher')
-secret=$(jq -r '.secret' <<< ${publisher})
-if [ -z "${secret}" ]; then
-  echo "Failed to get secret"
-  exit 1;
-fi
+# publisher=$(kubectl get secrets config -o json | \
+#   jq -r '.data["secrets-moon.yaml"]' | \
+#   base64 -d | yaml2json - | \
+#   jq -r '.environment[]|select(.name="moon").config.publisher')
+# secret=$(jq -r '.secret' <<< ${publisher})
+# if [ -z "${secret}" ]; then
+#   echo "Failed to get secret"
+#   exit 1;
+# fi
 
 rundate=$(date "+%Y-%m-%d_%H:%M:%S")
 isQuiet=false
@@ -41,21 +44,28 @@ function uploadContent {
   h1 Uploading content
 
   local rsyncExclude=''
+  local rsyncDest
+  if [ -z "${remoteHost}" ]; then
+    rsyncDest=${remoteDir}
+    mkdir -p "${remoteDir}"
+  else
+    rsyncDest="${remoteHost}:${remoteDir}"
+  fi
 
-  h2 "Sending ${DIR}/content/draft to ${remoteHost}:${remoteDir}"
+  h2 "Sending ${DIR}/content/draft to ${rsyncDest}"
 
   rsync -avz -e ssh --stats --progress --delete ${DIR}/content/draft ${rsyncExclude} \
-      ${remoteHost}:${remoteDir}
+      ${rsyncDest}
 
-  h2 "Sending ${DIR}/content/ready to ${remoteHost}:${remoteDir}"
+  h2 "Sending ${DIR}/content/ready to ${rsyncDest}"
 
   rsync -avz -e ssh --stats --progress ${DIR}/content/ready ${rsyncExclude} \
-      ${remoteHost}:${remoteDir}
+      ${rsyncDest}
 
-  h2 "Sending ${DIR}/content/retired to ${remoteHost}:${remoteDir}"
+  h2 "Sending ${DIR}/content/retired to ${rsyncDest}"
 
-  rsync -avz -e ssh --stats --progress ${DIR}/content/retired ${rsyncExclude} \
-      ${remoteHost}:${remoteDir}
+  rsync -avz -e ssh --stats --progress ${DIR}/content/retire ${rsyncExclude} \
+      ${rsyncDest}
 }
 
 function validateContent {
@@ -101,7 +111,6 @@ function contentError {
 function runPublish {
   echo "isQuiet ${isQuiet}"
   info "Publishing to ${apiEndpoint}"
-  resultFile=/var/folders/4_/s1sj1yln4r39mhgby6h3d41r0000gn/T/tmp.ZJf5mqlU
   resultFile=$(mktemp)
   curl -k -X POST ${apiEndpoint} -H "X-CapnAjax-Secret: ${secret}" -d '' | tee ${resultFile}
 
@@ -135,10 +144,9 @@ function runPublish {
 
     done
     
-    mv content/${action}/${contentItemName} \
+    echo mv content/${action}/${contentItemName} \
       content/${newStatus}
   done
-
 
   rm ${resultFile}
 }
