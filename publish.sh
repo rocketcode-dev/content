@@ -125,6 +125,11 @@ function runPublish {
     h1 RECORD
     jq <<< ${record}
 
+    if [ 'file' == "$(jq -r '.class' <<< ${record})" ]; then
+      h2 skipping file record
+      continue
+    fi
+
     contentItemName=$(jq -r '.name'  <<< ${record})
     action=$(jq -r '.action' <<< ${record})
     newStatus=$(jq -r '.status' <<< ${record})
@@ -133,15 +138,18 @@ function runPublish {
     info action: ${action}
     info new status: ${newStatus}
 
-    for (( j = 0; j < numFiles; j++)); do
+    for (( j = 0; j < numFiles; j++ )); do
 
-      fileRecord=$(jq '.files[$c]' --argjson c ${j} <<< ${record})
-      filename=$(jq -r '.name' <<< ${fileRecord})
-
-      h2 FILE ${filename}
-      jq -r '.content' <<< ${fileRecord} > \
-        content/${action}/${contentItemName}/${filename}
-
+      local fileRecord=$(jq '.files[$c]' --argjson c ${j} <<< ${record})
+      local pathname=$(jq -r '.path' <<< ${fileRecord})
+      local type=$(jq -r '.type' <<< ${fileRecord})
+      
+      h2 FILE ${pathname}, type ${type}
+      local content64=$(jq -r '.obj' <<< ${fileRecord})
+      local fullpath="content/${action}/${contentItemName}/${pathname}"
+      
+      cat - <<< ${content64} | base64 -d > ${fullpath}
+      
     done
     
     echo mv content/${action}/${contentItemName} \
