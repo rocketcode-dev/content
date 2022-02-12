@@ -152,7 +152,7 @@ function runPublish {
       
     done
     
-    echo mv content/${action}/${contentItemName} \
+    mv content/${action}/${contentItemName} \
       content/${newStatus}
   done
 
