@@ -1,19 +1,20 @@
+---
 article:
   author: thomas
   # active_dt: <date to activate -- use this to queue articles>
   content_type: cheat
   tags:
-  - cheat-notes
-  - scripting
-  - Linux
+    - cheat-notes
+    - scripting
+    - Linux
   permalinks:
-  - test-commands
+    - test-commands
 
 info:
   title: "Test commands"
   abstract:
     format: text/plain
-    text: 
+    text: This is a list of test commands to use for shell scripts
   article:
     format: text/markdown
     file: test-commands.md

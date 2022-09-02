@@ -1,0 +1,21 @@
+article:
+  author: thomas
+  content_type: article
+  tags:
+    - Kubernetes
+    - API
+    - DevOps
+  permalinks:
+    - patch-api
+  uuid: 59e84dc0-1673-11ed-874d-a937075e186a
+  active_dt: 1659892020426
+info:
+  title: Using Kubernetes APIs to patch a secret
+  abstract:
+    format: text/markdown
+    text: This takes you through the process of creating a service account, giving
+      yourself access, and using the Kubernetes APIs to update a secret.
+  article:
+    format: text/markdown
+    file: patch-api.md
+  name: patch-api

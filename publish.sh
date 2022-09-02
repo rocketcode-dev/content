@@ -2,7 +2,7 @@
 
 ENV=$1
 if [ -z "${ENV}" ]; then
-  ENV=moon
+  ENV=prod
 fi
 
 DIR="$(cd "$(dirname "$0")"; pwd -L)"

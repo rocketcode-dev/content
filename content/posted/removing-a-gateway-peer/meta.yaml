@@ -2,13 +2,14 @@ article:
   author: thomas
   content_type: article
   tags:
-  - IBM API Connect
-  - IBM DataPower Gateway
-  - Operations
-  - High Availability
+    - IBM API Connect
+    - IBM DataPower Gateway
+    - Operations
+    - High Availability
   permalinks:
-  - removing-a-gateway-peer
-
+    - removing-a-gateway-peer
+  uuid: 59f8a170-1673-11ed-874d-a937075e186a
+  active_dt: 1659892020566
 info:
   title: Removing a gateway peer from a peer group
   abstract:
@@ -20,3 +21,4 @@ info:
   article:
     format: text/markdown
     file: removing-a-gateway-peer.md
+  name: removing-a-gateway-peer
