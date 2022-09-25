@@ -34,7 +34,7 @@ Sep 12 09:57:35 athabasca kubelet[3902708]: E0912 09:57:35.473354 3902708 kubele
 
 This shows the most critical error, the API server. You may have generated other `kubectl` contexts with their own keys, but they won't be much use of the API server is out of service.
 
-### 
+### Renewing the certificates
 
 Because the certificate has already expired, a little surgery is required. Back up your server first, and once that's complete, we'll generate new certificates
 

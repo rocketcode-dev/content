@@ -1,6 +1,6 @@
-# Things every API Connect installation must have
+# Things every API Connect installation should have
 
-The items in this list will make an API Connect installation more stable, more usable, and look more professional.
+The items in this list will make an API Connect installation more stable, more usable, and more professional.
 
 For system requirements, consult the [IBM Software Product Compatibility Report](https://www.ibm.com/software/reports/compatibility/clarity/index.html) for your version of API Connect.
 
@@ -9,7 +9,6 @@ For system requirements, consult the [IBM Software Product Compatibility Report]
 The clocks on all nodes must be in sync. A lot of weird problems can happen if they drift apart.
 
 This is particularly problematic with OVA installations. By default, the API Connect appliances use Ubuntu's NTP services, but many API Connect installations do not have access to the internet, and, thus, cannot reach Ubuntu's NTP service. It doesn't take long for the node's locks to drift out of sync, even if they are running on the same VMWare host. On new installations, you may provide an extra values file to configure NTP, but on existing installations, [you must configure timesyncd by hand](/article/ntp-on-api-connect).
-
 
 ## Notification Templates
 

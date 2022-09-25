@@ -1,3 +1,4 @@
+---
 article:
   author: thomas
   content_type: article
@@ -14,10 +15,10 @@ info:
   title: Removing a gateway peer from a peer group
   abstract:
     format: text/plain
-    text: When decommissioning and permanently removing a gateway from a peer group,
-      it's a good idea to ensure the peer group knows it's gone. Otherwise, it
-      may assume it's a regular outage and count the decommissioned gateway
-      against quorum.
+    text: When decommissioning and permanently removing a gateway from a peer
+      group, it's a good idea to ensure the peer group knows it's gone.
+      Otherwise, it may assume it's a regular outage and count the
+      decommissioned gateway against quorum.
   article:
     format: text/markdown
     file: removing-a-gateway-peer.md

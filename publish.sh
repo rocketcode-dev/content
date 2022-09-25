@@ -162,3 +162,5 @@ function runPublish {
 validateContent
 uploadContent
 runPublish
+
+curl -ki ${cacheClear}

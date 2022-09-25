@@ -1,0 +1,24 @@
+article:
+  author: thomas
+  content_type: article
+  tags:
+    - JavaScript
+    - Kubernetes
+    - Vue.js
+    - Usability
+  permalinks:
+    - deep-linking-vue
+  uuid: ac2ddbe0-3c20-11ed-874d-a937075e186a
+  active_dt: 1664034654452
+info:
+  title: Deep linking in Vue.js apps in Kubernetes
+  abstract:
+    format: text/plain
+    text: >
+      With most Vue.js apps, the server doesn't even understand paths; they are
+      interpreted on the client side. How to make a server understand them and
+      avoid 404 errors?
+  article:
+    format: text/markdown
+    file: deep-linking-vue.md
+  name: deep-linking-vue
