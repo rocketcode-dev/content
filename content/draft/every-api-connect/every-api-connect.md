@@ -60,7 +60,7 @@ apim    IN CNAME mgmt.gly6euo7bo.dev.nttntqr8kt.capnajax.com.
 
 This is mostly a concern for development services as production services are normally behind load balancers.
 
-## Platform-agnostic DNS names
+## Platform-agnostic endpoint DNS names
 
 Endpoint names should not contain the name of your datacenter. Doing this will prevent moving to other datacenters in the future. Maybe you don't intend to move now, but things can happen in the future. What if the datacenter has an outage? What if your provider changes their pricing model? It is difficult, risky, and disruptive to change endpoint names. Because these names will be with you for many years, it's best to ensure these names are going to work with you for a long time. Again, a `CNAME` in your DNS service can provide these platform-agnositc names.
 
@@ -87,3 +87,5 @@ Many companies operate API Connect in clusters of VMWare hosts spread across mul
 # Conclusion
 
 Every installer, administrator, and developer of API Connect should strive to provide the most stable, most usable, and most professional-looking API Connect experience possible. The tips above are essential to providing just that.
+
+_Special thanks to [Chris Phillips](https://chrisphillips-cminion.github.io) for reviewing this article._
