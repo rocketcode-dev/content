@@ -6,9 +6,15 @@ For system requirements, consult the [IBM Software Product Compatibility Report]
 
 ## NTP Services Configured
 
-The clocks on all nodes must be in sync. A lot of weird problems can happen if they drift apart.
+NTP is listed first because its importance cannot be overstated. The clocks on all nodes of all subsystems must be in sync. A lot of weird problems can happen if they drift apart. And these weird problems can lead to data loss.
 
 This is particularly problematic with OVA installations. By default, the API Connect appliances use Ubuntu's NTP services, but many API Connect installations do not have access to the internet, and, thus, cannot reach Ubuntu's NTP service. It doesn't take long for the node's locks to drift out of sync, even if they are running on the same VMWare host. On new installations, you may provide an extra values file to configure NTP, but on existing installations, [you must configure timesyncd by hand](/article/ntp-on-api-connect).
+
+## Backups
+
+IBM has one backup and restore strategy that is supported [[doc]](https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=mac-backing-up-restoring). Many companies use vMotion and they will usually have success with that, but IBM cannot provide support when things go wrong unless the supported backup mechanism is available. Note: when operating two data centers, the backups should reside in the backup datacenter, not the primary one, because in case the primary datacenter goes down, the backup files must be available to the backup datacenter.
+
+Note that analytics backups require S3-compatible storage.
 
 ## Notification Templates
 
@@ -28,7 +34,7 @@ To continue, please use the link below:
 {{{activationLink}}}
 ```
 
-It reads a lot like the extended warrantee call. Replace these notifications with branded messages and specific information. Add your company logo. Instead of "the administrator", name the actual administration team. Add a link to the admin team's intranet site. All of these things not only communicate that these notifications are important and intentional and they come from you. They also put a professional face on what is, for most of your users, their first interaction with API Connect.
+It reads a lot like the extended warrantee call. Replace these notifications with branded messages and specific information. Add your company logo. Instead of "the administrator", name the actual administration team. Add a link to the admin team's intranet site. All of these communicate that these notifications are important and intentional and they come from you, but they also put a professional face on what is, for most of your users, their first interaction with API Connect.
 
 ## Health-check Endpoints
 
@@ -54,7 +60,11 @@ apim    IN CNAME mgmt.gly6euo7bo.dev.nttntqr8kt.capnajax.com.
 
 This is mostly a concern for development services as production services are normally behind load balancers.
 
-## A runbook
+## Platform-agnostic DNS names
+
+Endpoint names should not contain the name of your datacenter. Doing this will prevent moving to other datacenters in the future. Maybe you don't intend to move now, but things can happen in the future. What if the datacenter has an outage? What if your provider changes their pricing model? It is difficult, risky, and disruptive to change endpoint names. Because these names will be with you for many years, it's best to ensure these names are going to work with you for a long time. Again, a `CNAME` in your DNS service can provide these platform-agnositc names.
+
+## A Runbook
 
 What happens if there is a disaster? What happens if a backhoe breaks your internet connection? What happens if a transformer goes bang? A server lets its smoke out? A power outage? A disk fails?
 
@@ -64,19 +74,15 @@ Does your staff know what to do? Do they know how to move the servers to your ba
 
 Runbooks are like pilots' flight manuals. Your admins know what they have to do every day, but in emergencies, they resort to these runbooks to make sure they get every step right and they know whom to talk to if they need help with something outside their control. These runbooks reduce downtime and prevent data loss.
 
-A runbook is only effective if it's tested. Your team should perform an annual disaster recovery drill, following the instructions in the runbook, to expose any issues with it. Remember, if there's a disaster affecting API Connect hosts in a data center, there's probably a disaster affecting all the hosts in the data center, so your team will be multitasking, distracted, and stressed as they try to bring your company's business back online.
+A Runbook is only effective if it's tested. Your team should perform an annual disaster recovery drill, following the instructions in the runbook, to expose any issues with it. Remember, if there's a disaster affecting API Connect hosts in a data center, there's probably a disaster affecting all the hosts in the data center, so your team will be multitasking, distracted, and stressed as they try to bring your company's business back online.
+
+More on Runbooks on [Chris Phillips' blog](https://chrisphillips-cminion.github.io/day2-ops/2021/11/08/RunBook.html)
 
 ## ISO Ignored mode
 
 This is only applicable to OVA installations and is a new feature of API Connect 10.0.1.5-eus.
 
 Many companies operate API Connect in clusters of VMWare hosts spread across multiple data centers and cannot guarantee the ISO will be available should the VM have to move to a different machine. In these environments, once virtual machines have been set up and booted, [set `iso-ignored` mode](https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=connect-appliance-boot-mode-configuration) to remove the need for the ISO needed at install time.
-
-## Backups
-
-IBM has one backup and restore strategy that is supported [[doc]](https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=mac-backing-up-restoring). Many companies use vMotion and they will usually have success with that, but IBM cannot provide support when things go wrong unless the supported backup mechanism is available. Note: when operating two data centers, the backups should reside in the backup datacenter, not the primary one, because in case the primary datacenter goes down, the backup files must be available to the backup datacenter.
-
-Note that analytics backups require S3-compatible storage.
 
 # Conclusion
 
