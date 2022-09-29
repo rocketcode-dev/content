@@ -72,9 +72,9 @@ What happens if you need to do scheduled maintenance? A fixpack install?
 
 Does your staff know what to do? Do they know how to move the servers to your backup data center? Do they know how to install a fixpack while minimizing downtime? Are they going to get everything done right when they are under pressure or might they miss a step?
 
-Runbooks are like pilots' flight manuals. Your admins know what they have to do every day, but in emergencies, they resort to these runbooks to make sure they get every step right and they know whom to talk to if they need help with something outside their control. These runbooks reduce downtime and prevent data loss.
+Runbooks are like pilots' flight manuals. Your admins know what they have to do every day, but in emergencies, they resort to these Runbooks to make sure they get every step right and they know whom to talk to if they need help with something outside their control. These Runbooks reduce downtime and prevent data loss.
 
-A Runbook is only effective if it's tested. Your team should perform an annual disaster recovery drill, following the instructions in the runbook, to expose any issues with it. Remember, if there's a disaster affecting API Connect hosts in a data center, there's probably a disaster affecting all the hosts in the data center, so your team will be multitasking, distracted, and stressed as they try to bring your company's business back online.
+A Runbook is only effective if it's tested. Your team should perform an annual disaster recovery drill, following the instructions in the Runbook, to expose any issues with it. Remember, if there's a disaster affecting API Connect hosts in a data center, there's probably a disaster affecting all the hosts in the data center, so your team will be multitasking, distracted, and stressed as they try to bring your company's business back online.
 
 More on Runbooks on [Chris Phillips' blog](https://chrisphillips-cminion.github.io/day2-ops/2021/11/08/RunBook.html)
 
