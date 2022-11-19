@@ -8,7 +8,7 @@ For system requirements, consult the [IBM Software Product Compatibility Report]
 
 NTP is listed first because its importance cannot be overstated. The clocks on all nodes of all subsystems must be in sync. A lot of weird problems can happen if they drift apart. And these weird problems can lead to data loss.
 
-This is particularly problematic with OVA installations. By default, the API Connect appliances use Ubuntu's NTP services, but many API Connect installations do not have access to the internet, and, thus, cannot reach Ubuntu's NTP service. It doesn't take long for the node's locks to drift out of sync, even if they are running on the same VMWare host. On new installations, you may provide an extra values file to configure NTP, but on existing installations, [you must configure timesyncd by hand](/article/ntp-on-api-connect).
+This is particularly problematic with OVA installations. By default, the API Connect appliances use Ubuntu's NTP services, but many API Connect installations do not have access to the internet, and, thus, cannot reach Ubuntu's NTP service. It doesn't take long for the node's clocks to drift out of sync, even if they are running on the same VMWare host. On new installations, you may provide an [extra values file](https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=subsystem-configuring-use-external-ntp-server) to configure NTP, but on existing installations, [you must configure timesyncd by hand](/article/ntp-on-api-connect).
 
 ## Backups
 
