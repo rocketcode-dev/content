@@ -52,20 +52,48 @@ function uploadContent {
     rsyncDest="${remoteHost}:${remoteDir}"
   fi
 
-  h2 "Sending ${DIR}/content/draft to ${rsyncDest}"
+  if [ "${remoteHostType}" == "linux" ]; then
 
-  rsync -avz -e ssh --stats --progress --delete ${DIR}/content/draft ${rsyncExclude} \
-      ${rsyncDest}
+    h2 "Sending ${DIR}/content/draft to ${rsyncDest}"
 
-  h2 "Sending ${DIR}/content/ready to ${rsyncDest}"
+    rsync -avz -e ssh --stats --progress --delete ${DIR}/content/draft ${rsyncExclude} \
+        ${rsyncDest}
 
-  rsync -avz -e ssh --stats --progress ${DIR}/content/ready ${rsyncExclude} \
-      ${rsyncDest}
+    h2 "Sending ${DIR}/content/ready to ${rsyncDest}"
 
-  h2 "Sending ${DIR}/content/retired to ${rsyncDest}"
+    rsync -avz -e ssh --stats --progress ${DIR}/content/ready ${rsyncExclude} \
+        ${rsyncDest}
 
-  rsync -avz -e ssh --stats --progress ${DIR}/content/retire ${rsyncExclude} \
-      ${rsyncDest}
+    h2 "Sending ${DIR}/content/retired to ${rsyncDest}"
+
+    rsync -avz -e ssh --stats --progress ${DIR}/content/retire ${rsyncExclude} \
+        ${rsyncDest}
+
+  elif [ "${remoteHostType}" == "pod" ]; then
+
+    local selector=${remoteHost}
+    local pods=($(kubectl get pods --selector=${selector} -o name))
+    for pod in ${pods[@]}; do
+
+      h2 "Sending ${DIR}/content/draft to ${pod}"
+      kubectl exec ${pod} -- rm -rf /data/content/draft
+      kubectl exec ${pod} -- mkdir /data/content/draft
+      kubectl cp ${DIR}/content/draft ${pod}:/data/content
+
+      h2 "Sending ${DIR}/content/ready to ${pod}"
+      kubectl cp ${DIR}/content/ready ${pod}:/data/content
+
+      h2 "Sending ${DIR}/content/retired to ${pod}"
+      kubectl cp ${DIR}/content/retired ${pod}:/data/content
+
+    done
+
+  else
+
+    echo "Unknown remote host type \"${remoteHostType}\""
+    exit 1
+  
+  fi
 }
 
 function validateContent {
