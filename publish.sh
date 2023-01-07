@@ -73,17 +73,24 @@ function uploadContent {
 
     local selector=${remoteHost}
     local pods=($(kubectl get pods --selector=${selector} -o name))
-    for pod in ${pods[@]}; do
+    for nspod in ${pods[@]}; do
+
+      pod=$(sed -e 's/^pod\///' <<< ${nspod})
 
       h2 "Sending ${DIR}/content/draft to ${pod}"
+      echo kubectl exec ${pod} -- rm -rf /data/content/draft
       kubectl exec ${pod} -- rm -rf /data/content/draft
+      echo kubectl exec ${pod} -- mkdir /data/content/draft
       kubectl exec ${pod} -- mkdir /data/content/draft
+      echo kubectl cp ${DIR}/content/draft ${pod}:/data/content
       kubectl cp ${DIR}/content/draft ${pod}:/data/content
 
       h2 "Sending ${DIR}/content/ready to ${pod}"
+      echo kubectl cp ${DIR}/content/ready ${pod}:/data/content
       kubectl cp ${DIR}/content/ready ${pod}:/data/content
 
       h2 "Sending ${DIR}/content/retired to ${pod}"
+      echo kubectl cp ${DIR}/content/retired ${pod}:/data/content
       kubectl cp ${DIR}/content/retired ${pod}:/data/content
 
     done
