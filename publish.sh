@@ -90,8 +90,8 @@ function uploadContent {
       kubectl cp ${DIR}/content/ready ${pod}:/data/content
 
       h2 "Sending ${DIR}/content/retired to ${pod}"
-      echo kubectl cp ${DIR}/content/retired ${pod}:/data/content
-      kubectl cp ${DIR}/content/retired ${pod}:/data/content
+      echo kubectl cp ${DIR}/content/retire ${pod}:/data/content
+      kubectl cp ${DIR}/content/retire ${pod}:/data/content
 
     done
 
