@@ -1,0 +1,360 @@
+#!/usr/bin/env node
+
+const fs = require('fs').promises;
+const fsConstants = require('fs').constants;
+const http = require('http');
+const https = require('https');
+const path = require('path');
+
+const SEPARATOR='n9~~gysk8048~~y0hwuwl7~~c0';
+
+const defaultProfilePaths = [
+  __dirname + '/profiles.json',
+  __dirname + '/secrets/profiles.json',
+  '/usr/local/publish/profiles.json'
+];
+
+const defaultProfile = {
+  hostname: 'localhost',
+  insecure: true,
+  port: 3000,
+  scheme: 'http',
+  secret: 'super-secret-secret'
+};
+
+let profileInfo = defaultProfile;
+
+const extensions = {
+  '.aac': 'audio/aac',
+  '.abw': 'application/x-abiword',
+  '.arc': 'application/x-freearc',
+  '.avif': 'image/avif',
+  '.avi': 'video/x-msvideo',
+  '.azw': 'application/vnd.amazon.ebook',
+  '.bin': 'application/octet-stream',
+  '.bmp': 'image/bmp',
+  '.bz': 'application/x-bzip',
+  '.bz2': 'application/x-bzip2',
+  '.cda': 'application/x-cdf',
+  '.csh': 'application/x-csh',
+  '.css': 'text/css',
+  '.csv': 'text/csv',
+  '.doc': 'application/msword',
+  '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  '.eot': 'application/vnd.ms-fontobject',
+  '.epub': 'application/epub+zip',
+  '.gz': 'application/gzip',
+  '.gif': 'image/gif',
+  '.htm': 'text/html',
+  '.html': 'text/html',
+  '.ico': 'image/vnd.microsoft.icon',
+  '.ics': 'text/calendar',
+  '.jar': 'application/java-archive',
+  '.jpeg': 'image/jpeg',
+  '.jpg': 'image/jpeg',
+  '.js': 'text/javascript',
+  '.json': 'application/json',
+  '.jsonld': 'application/ld+json',
+  '.md': 'text/markdown',
+  '.mid': 'audio/midi',
+  '.midi': 'audio/midi',
+  '.mjs': 'text/javascript',
+  '.mp3': 'audio/mpeg',
+  '.mp4': 'video/mp4',
+  '.mpeg': 'video/mpeg',
+  '.mpkg': 'application/vnd.apple.installer+xml',
+  '.odp': 'application/vnd.oasis.opendocument.presentation',
+  '.ods': 'application/vnd.oasis.opendocument.spreadsheet',
+  '.odt': 'application/vnd.oasis.opendocument.text',
+  '.oga': 'audio/ogg',
+  '.ogv': 'video/ogg',
+  '.ogx': 'application/ogg',
+  '.opus': 'audio/opus',
+  '.otf': 'font/otf',
+  '.png': 'image/png',
+  '.pdf': 'application/pdf',
+  '.php': 'application/x-httpd-php',
+  '.ppt': 'application/vnd.ms-powerpoint',
+  '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  '.rar': 'application/vnd.rar',
+  '.rtf': 'application/rtf',
+  '.sh': 'application/x-sh',
+  '.svg': 'image/svg+xml',
+  '.tar': 'application/x-tar',
+  '.tif': 'image/tiff',
+  '.tiff': 'image/tiff',
+  '.ts': 'video/mp2t',
+  '.ttf': 'font/ttf',
+  '.txt': 'text/plain',
+  '.vsd': 'application/vnd.visio',
+  '.wav': 'audio/wav',
+  '.weba': 'audio/webm',
+  '.webm': 'video/webm',
+  '.webp': 'image/webp',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.xhtml': 'application/xhtml+xml',
+  '.xls': 'application/vnd.ms-excel',
+  '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  '.xml': 'application/xml',
+  '.xul': 'application/vnd.mozilla.xul+xml',
+  '.yaml': 'application/yaml',
+  '.zip': 'application/zip',
+  '.7z': 'application/x-7z-compressed'
+}
+
+function concatBufers(bufferAr) {
+  let numBytes = 0;
+  let offset = 0;
+  for (let b of bufferAr) {
+    numBytes += b.length;
+  }
+  let result = Buffer.alloc(numBytes);
+  for (let b of bufferAr) {
+    b.copy(result, offset);
+    offset += b.length;
+  }
+  return result;
+}
+
+async function parseCommandLine() {
+
+  let argList = [ ... process.argv.splice(2) ];
+  let profile = null;
+  let config = null;
+  let errors = false;
+
+  while (argList.length > 0) {
+    let arg = argList.shift();
+    switch(arg) {
+    case '--config':
+      config = argList.shift();
+      break;
+    case '--profile':
+      profile = argList.shift();
+      break;
+    default:
+      console.error('argument "%s" not known', arg);
+      errors = false;
+      break;
+    }
+  }
+  errors && process.exit(1);
+
+  for (let pathname of config || defaultProfilePaths) {
+    let result = await ((p) => {
+      return fs.access(p, fsConstants.R_OK)
+      .then(() => {
+        return true;
+      })
+      .catch(() => {
+        return false;
+      });
+    })(pathname);
+    if (result) {
+      try {
+        config = JSON.parse((await fs.readFile(pathname)).toString());
+      } catch(reason) {
+        console.error('Failed to load profiles file: %s', reason);
+        process.exit(1);
+      }
+    } else {
+      console.warn('Could not find profiles file. Using default profile');
+    }
+  }
+
+  profileInfo = (config && profile) ? config[profile] : defaultProfile;
+}
+
+class Message {
+  #files = new Array();
+  
+  constructor() {}
+
+  async addFile(file, options) {
+    options = options ? { ... options } : {};
+    if (!options.type) {
+      let extension = path.extname(file);
+      options.type = extensions[extension];
+      if (!options.type) {
+        const message = 'type not specified and could not determine from ' +
+          `extension for file "${file}"`;
+        console.error(message);
+        throw message;
+      }
+    }
+
+    let name = path.basename(file);
+    if (options.dir) {
+      name = path.join(options.dir, name);
+    }
+
+    let contentBuf = await fs.readFile(path.join(options.basepath||'.', name));
+    this.#files.push({name, type: options.type, contentBuf});
+  }
+
+  export() {
+    let contentLines = new Array();
+    contentLines.push(
+      `Content-Type: multipart/form-data; boundary=${SEPARATOR}`);
+    contentLines.push('');
+    for (let f of this.#files) {
+      contentLines.push(`--${SEPARATOR}`);
+      contentLines.push(`Content-Disposition: file; filename="${f.name}"`);
+      contentLines.push(`Content-Type: ${f.type}`);
+      contentLines.push('Content-Transfer-Encoding: base64');
+      contentLines.push('');
+      let contentb64 = f.contentBuf.toString('base64');
+      let len = contentb64.length;
+      for (let offs = 0; offs < len; offs += 96) {
+        contentLines.push(
+          contentb64.substring(offs, Math.min(offs + 96, len))
+        );
+      }
+    }
+    contentLines.push(`--${SEPARATOR}--`);
+    contentLines.push('');
+    let contentStr = contentLines.join('\r\n');
+    return contentStr;
+  }
+
+  async readdir(dir) {
+    let dirStat = await fs.stat(dir);
+    if (!dirStat.isDirectory()) {
+      const message = `Path "${file}" is not a directory`;
+      console.error(message);
+      throw message;
+    }
+    let metaStat = await fs.stat(path.join(dir, 'meta.yaml'));
+    if (!metaStat.isFile()) {
+      const message = `Path "${file}" has no meta.yaml file`;
+      console.error(message);
+      throw message;
+    }
+    await this.addFile('meta.yaml', { basepath: dir });
+
+    let files = [];
+    const wft = {withFileTypes: true};
+    for(let f of await fs.readdir(dir, wft)) {
+      if (f.name === 'meta.yaml') {
+        continue;
+      }
+      files.push({name: f.name, dirPrefix: null, isDir: f.isDirectory()});
+    }
+    while(files.length) {
+      let file = files.shift();
+      if (file.isDir) {
+        let dirpath = file.dirPrefix
+          ? path.join(dir, file.dirPrefix, file.name)
+          : path.join(dir, file.name);
+        let dirPrefix = file.dirPrefix
+          ? path.join(file.dirPrefix, file.name)
+          : file.name
+        for (let ff of await fs.readdir(dirpath, wft)) {
+          files.push({
+            name: ff.name,
+            dirPrefix,
+            isDir: ff.isDirectory()
+          });
+        }
+      } else {
+        let options = { basepath: dir };
+        if (file.dirPrefix) {
+          options.dir = file.dirPrefix;
+        }
+        await this.addFile(file.name, options);
+      }
+    }
+  }
+}
+
+parseCommandLine()
+.then(() => {
+  const ready = path.join('content','ready');
+  return fs.readdir(ready, {withFileTypes: true})
+    .then(async dirs => {
+      dirs = dirs.filter(dir => dir.isDirectory());
+      let dirPromises = dirs.map(async dir => {
+        let subdir = await fs.readdir(
+          path.join(ready, dir.name),
+          {withFileTypes: true}
+        );
+        let meta = subdir.find(f => f.name == 'meta.yaml');
+        return meta.isFile() ? dir.name : null;
+      });
+      dirs = (await Promise.all(dirPromises)).filter(d=>d);
+      console.log('Publishing:');
+      dirs.forEach((d,i) => console.log(`  ${i+1}. ${d}`));
+      return dirs.map(d=>path.join(ready, d));
+    })
+})
+.then(dirs => {
+  const message = new Message();
+  let publishPromises = [];
+  for (let dir of dirs) {
+    publishPromises.push(
+      message.readdir(dir)
+      .then(() => {
+        const proto = profileInfo.scheme === 'https' ? https : http;
+        const lines = message.export().split('\n');
+        let requestOptions = {
+          hostname: profileInfo.hostname,
+          port: profileInfo.port,
+          path: '/publisher/publish',
+          method: 'POST',
+          protocol: `${profileInfo.scheme}:`,
+          headers: {}
+        };
+        let line;
+        while (!(line = lines.shift()).match(/^\r?$/)) {
+          const headerParts = line.match(/^([^:]+): ?(.+)\r?$/);
+          console.log(JSON.stringify(line));
+          console.log(headerParts);
+          if (!headerParts) {
+            console.error("Internal error, invalid output qtbmp9dhaf:", line);
+          }
+          requestOptions.headers[headerParts[1]] = headerParts[2];
+        }
+
+        console.log('requestOptions:', requestOptions);
+
+        let p = new Promise((resolve, reject) => {
+          let request = proto.request(requestOptions, res => {
+            let chunks = [];
+            console.log('%s %s %s',
+              res.httpVersion, res.statusCode, res.statusMessage);
+            const headers = res.rawHeaders;      
+            for (let i = 0; i < headers.length; i += 2) {
+              console.log('%s: %s', headers[i], headers[i+1]);
+            }
+            console.log();
+            res.on('data', (chunk) => {
+              chunks.push(chunk);
+            });
+            res.on('end', res => {
+              let metaLock = concatBufers(chunks)
+              fs.writeFile(`${dir}/meta-lock.yaml`, metaLock);
+              console.log('chunks: %s, combined:', chunks.length);
+              console.log(metaLock.toString());
+              console.log();
+              console.log('Complete');
+              console.log();
+              resolve({dir, metaLock: metaLock.toString()});
+            });
+          });
+          request.write(lines.join('\n'));
+          request.end();
+        });
+
+        return p;
+      })
+      .then(({dir, metaLock}) => {
+        if (metaLock.status === 'published') {
+          // TODO move to the appropriate directory
+        }
+      })
+    )
+  }
+  return publishPromises;
+})
+

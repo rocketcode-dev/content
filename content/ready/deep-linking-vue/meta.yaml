@@ -9,7 +9,6 @@ article:
     - Usability
   permalinks:
     - deep-linking-vue
-  uuid: ac2ddbe0-3c20-11ed-874d-a937075e186a
   active_dt: 1664034654452
 info:
   title: Deep linking in Vue.js apps in Kubernetes

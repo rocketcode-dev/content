@@ -9,7 +9,6 @@ article:
     - High Availability
   permalinks:
     - removing-a-gateway-peer
-  uuid: 59f8a170-1673-11ed-874d-a937075e186a
   active_dt: 1659892020566
 info:
   title: Removing a gateway peer from a peer group

@@ -7,7 +7,6 @@ article:
     - IBM DataPower Gateway
   permalinks:
     - v5c-to-api-gateway
-  uuid: 5a0d3ae0-1673-11ed-874d-a937075e186a
   active_dt: 1659892020672
 info:
   title: Moving APIs from the v5c to API Gateway

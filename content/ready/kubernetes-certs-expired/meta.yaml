@@ -8,7 +8,6 @@ article:
     - Operations
   permalinks:
     - kubernetes-certs-expired
-  uuid: ac5e61c0-3c20-11ed-874d-a937075e186a
   active_dt: 1664034654731
 info:
   title: Renewing Kubernetes certificates after they have expired

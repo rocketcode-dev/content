@@ -9,7 +9,6 @@ article:
     - Usability
   permalinks:
     - every-api-connect
-  uuid: ac4a3d80-3c20-11ed-874d-a937075e186a
   active_dt: 1664034654621
 info:
   title: Things every API Connect installation should have
