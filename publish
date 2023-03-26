@@ -205,12 +205,15 @@ class Message {
       contentLines.push('Content-Transfer-Encoding: base64');
       contentLines.push('');
       let contentb64 = f.contentBuf.toString('base64');
-      let len = contentb64.length;
-      for (let offs = 0; offs < len; offs += 96) {
-        contentLines.push(
-          contentb64.substring(offs, Math.min(offs + 96, len))
-        );
-      }
+      // send as one line
+      contentLines.push(contentb64);
+      // split in lines
+      // let len = contentb64.length;
+      // for (let offs = 0; offs < len; offs += 96) {
+      //   contentLines.push(
+      //     contentb64.substring(offs, Math.min(offs + 96, len))
+      //   );
+      // }
     }
     contentLines.push(`--${SEPARATOR}--`);
     contentLines.push('');
@@ -288,73 +291,73 @@ parseCommandLine()
       return dirs.map(d=>path.join(ready, d));
     })
 })
-.then(dirs => {
+.then(async dirs => {
   const message = new Message();
-  let publishPromises = [];
+  let publishes = [];
   for (let dir of dirs) {
-    publishPromises.push(
-      message.readdir(dir)
-      .then(() => {
-        const proto = profileInfo.scheme === 'https' ? https : http;
-        const lines = message.export().split('\n');
-        let requestOptions = {
-          hostname: profileInfo.hostname,
-          port: profileInfo.port,
-          path: '/publisher/publish',
-          method: 'POST',
-          protocol: `${profileInfo.scheme}:`,
-          headers: {}
-        };
-        let line;
-        while (!(line = lines.shift()).match(/^\r?$/)) {
-          const headerParts = line.match(/^([^:]+): ?(.+)\r?$/);
-          console.log(JSON.stringify(line));
-          console.log(headerParts);
-          if (!headerParts) {
-            console.error("Internal error, invalid output qtbmp9dhaf:", line);
-          }
-          requestOptions.headers[headerParts[1]] = headerParts[2];
-        }
-
-        console.log('requestOptions:', requestOptions);
-
-        let p = new Promise((resolve, reject) => {
-          let request = proto.request(requestOptions, res => {
-            let chunks = [];
-            console.log('%s %s %s',
-              res.httpVersion, res.statusCode, res.statusMessage);
-            const headers = res.rawHeaders;      
-            for (let i = 0; i < headers.length; i += 2) {
-              console.log('%s: %s', headers[i], headers[i+1]);
+    publishes.push(
+      await message.readdir(dir)
+        .then(() => {
+          const proto = profileInfo.scheme === 'https' ? https : http;
+          const lines = message.export().split('\n');
+          let requestOptions = {
+            hostname: profileInfo.hostname,
+            port: profileInfo.port,
+            path: '/publisher/publish',
+            method: 'POST',
+            protocol: `${profileInfo.scheme}:`,
+            headers: {}
+          };
+          let line;
+          while (!(line = lines.shift()).match(/^\r?$/)) {
+            const headerParts = line.match(/^([^:]+): ?(.+)\r?$/);
+            console.log(JSON.stringify(line));
+            console.log(headerParts);
+            if (!headerParts) {
+              console.error("Internal error, invalid output qtbmp9dhaf:", line);
             }
-            console.log();
-            res.on('data', (chunk) => {
-              chunks.push(chunk);
-            });
-            res.on('end', res => {
-              let metaLock = concatBufers(chunks)
-              fs.writeFile(`${dir}/meta-lock.yaml`, metaLock);
-              console.log('chunks: %s, combined:', chunks.length);
-              console.log(metaLock.toString());
-              console.log();
-              console.log('Complete');
-              console.log();
-              resolve({dir, metaLock: metaLock.toString()});
-            });
-          });
-          request.write(lines.join('\n'));
-          request.end();
-        });
+            requestOptions.headers[headerParts[1]] = headerParts[2];
+          }
 
-        return p;
-      })
-      .then(({dir, metaLock}) => {
-        if (metaLock.status === 'published') {
-          // TODO move to the appropriate directory
-        }
-      })
+          console.log('requestOptions:', requestOptions);
+
+          let p = new Promise((resolve, reject) => {
+            let request = proto.request(requestOptions, res => {
+              let chunks = [];
+              console.log('%s %s %s',
+                res.httpVersion, res.statusCode, res.statusMessage);
+              const headers = res.rawHeaders;      
+              for (let i = 0; i < headers.length; i += 2) {
+                console.log('%s: %s', headers[i], headers[i+1]);
+              }
+              console.log();
+              res.on('data', (chunk) => {
+                chunks.push(chunk);
+              });
+              res.on('end', res => {
+                let metaLock = concatBufers(chunks)
+                fs.writeFile(`${dir}/meta-lock.yaml`, metaLock);
+                console.log('chunks: %s, combined:', chunks.length);
+                console.log(metaLock.toString());
+                console.log();
+                console.log('Complete');
+                console.log();
+                resolve({dir, metaLock: metaLock.toString()});
+              });
+            });
+            request.write(lines.join('\n'));
+            request.end();
+          });
+
+          return p;
+        })
+        .then(({dir, metaLock}) => {
+          if (metaLock.status === 'published') {
+            // TODO move to the appropriate directory
+          }
+        })
     )
   }
-  return publishPromises;
+  return publishes;
 })
 
