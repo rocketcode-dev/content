@@ -1,5 +1,5 @@
 
-# Cheat notes: test commands
+# Cheat notes: Test Commands
 
 This is a list of test commands to use for shell scripts
 

@@ -4,8 +4,7 @@ article:
   # active_dt: <date to activate -- use this to queue articles>
   content_type: cheat
   tags:
-    - cheat-notes
-    - scripting
+    - Scripting
     - Linux
   permalinks:
     - test-commands

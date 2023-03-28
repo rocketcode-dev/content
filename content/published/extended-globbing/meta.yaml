@@ -3,9 +3,8 @@ article:
   author: thomas
   content_type: cheat
   tags:
-    - cheat-notes
-    - scripting
-    - linux
+    - Scripting
+    - Linux
   permalinks:
     - extended-globbing
 
