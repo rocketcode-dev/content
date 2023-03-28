@@ -306,6 +306,7 @@ parseCommandLine()
             path: '/publisher/publish',
             method: 'POST',
             protocol: `${profileInfo.scheme}:`,
+            family: 4,
             headers: {}
           };
           let line;

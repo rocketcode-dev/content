@@ -5,12 +5,12 @@ article:
   tags:
     - cheat-notes
     - scripting
-    - Linux
+    - linux
   permalinks:
     - extended-globbing
 
-  info:
-  title: "Cheat notes: extended globbing"
+info:
+  title: "Extended Globbing"
   abstract:
     format: text/plain
     text: Using extended globbing to match more patterns in your shell scripts.
