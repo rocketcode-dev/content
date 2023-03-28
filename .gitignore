@@ -1,3 +1,5 @@
 secrets
 modules
 toast
+node_modules
+export-*
