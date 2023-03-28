@@ -1,7 +1,5 @@
 # Moving APIs from the v5c to API Gateway
 
-Thomas D Wilkinson, IBM Hybrid Cloud Integration, October 2021
-
 One of the earliest choices API Connect users have to make is whether to set up a gateway V5 Compatibility mode (v5c) or the native API Gateway. All else being equal, the obvious choice is to use the API Gateway; the performance benefits are astounding. All new work should use the API Gateway. Unfortunately, sometimes this is not practical in the short term. APIs may be moved from an existing Version 5 installation, either by migration or reuse, and time constraints may make it difficult to move the existing APIs at once.
 
 The cloud admins have to make a choice: complete a v5 migration quickly by using v5c, or force everyone to migrate to v10 on their imposed schedule? When there are too many teams providing APIs, each with their own schedule constraints, coordinating a move is difficult. Because of this, admins often hold their noses and select V5 Compatibility mode.
@@ -95,7 +93,7 @@ However, there will still be nuisance 404 logs in the API Gateway and the host h
 
 ### Other methods
 
-There are meny other methods to handle routing between two different gateways. The list above is not exhaustive. Some more examples:
+There are many other methods to handle routing between two different gateways. The list above is not exhaustive. Some more examples:
 * The load balancer sends all API traffic to the API gateway, and anything that isn't ported, have a shadow API on the API Gateway that invokes into the v5c gateway
 * Load balancer sends all traffic to a web service on the gateway that routes traffic to the correct gateway based on path
 
