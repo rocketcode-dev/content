@@ -1,0 +1,19 @@
+{
+  "extension": {
+    "properties": {
+      "deploy-policy-emulator": false,
+      "deploy-policies": []
+    },
+    "files": [
+      {
+        "filename":"web-mgmt.zip",
+        "deploy": "immediate",
+        "type": "extension"
+      },{
+        "filename":"gw-extension.zip",
+        "deploy": "immediate",
+        "type": "extension"
+      }
+  ]
+}   
+}

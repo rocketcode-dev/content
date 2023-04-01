@@ -1,0 +1,27 @@
+---
+article:
+  author: thomas
+  # active_dt: <date to activate -- use this to queue articles>
+  content_type: article
+  tags:
+    - IBM API Connect
+    - IBM DataPower Gateway
+    - Operations
+  permalinks:
+    - gateway-extensions
+
+info:
+  title: Gateway Extensions on API Connect
+  abstract:
+    format: text/markdown
+    text: |
+      There are many reasons to use API Connect gateway extensions to
+      configure DataPower with API Connect: it helps to manage large clusters,
+      you need them to provide user-defined policies, or you're running
+      DataPower for Docker and need a way to persist your configurations. This
+      article details the process of creating an extension with a user-defined
+      policy and a gateway configuration.
+  article:
+    format: text/markdown
+    file: gateway-extensions.md
+
