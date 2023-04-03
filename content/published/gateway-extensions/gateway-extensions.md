@@ -19,20 +19,18 @@ IBM DataPower Gateway's power and they are difficult to manage.
 Even though the other form factors, Physical Appliances, VMWare, and Linux do
 persist their configurations and can hold files, it's still a good practice
 to favour Gateway Extensions to configure DataPower gateways used with API
-Connect. Extensions maintain consistency accross all gateways servers in a
+Connect. Extensions maintain consistency across all gateways servers in a
 cluster, simplifies adding or replacing a gateway appliance, and are easier
 to manage with source control and DevOps.
 
 In this article we're going to create a gateway extension that will
 
-* Build a user-defined policy,
-* Construct a gateway extension,
-* Install a gateway extension in API Connect,
-* Add a configuration to the gateway,
-* Bundling multiple extensions together, and
-* Place a file in the `local:` file system
+* [Build a user-defined policy](#building-a-user-defined-policy),
+* [Construct a gateway extension](#constructing-the-gateway-extension),
+* [Install a gateway extension in API Connect](#installing-the-gateway-extension), and
+* [Bundling multiple extensions together](#bundling-multiple-extensions-together)
 
-The examples in this article are targetted for the API Gateway on API
+The examples in this article are targeted for the API Gateway on API
 Connect version 10.0.5.1. The processes for V5 Compatibility mode and other
 versions of API Connect are similar but have notable differences that are
 outside of scope of this article.
@@ -117,7 +115,7 @@ assembly-gatewayscript my-basic-auth_1.0.0_gatewayscript_1
 exit
 ```
 
-### Combining them into an assemly and building a function
+### Combining them into an assembly and building a function
 
 ```
 api-rule my-basic-auth_1.0.0_main
@@ -223,17 +221,6 @@ apic gateway-extensions:get --scope org --org admin \
 Next, you will need to force the API Manager to send the extension to the
 gateway. This can be done by logging into the DataPower server UI and stopping and restarting the API Connect Gateway Service.
 
-```sh
-top
-switch domain default
-configure terminal
-
-web-mgmt
-  admin-state enabled
-  idle-timeout 14400
-exit
-```
-
 It may take a minute for the api manager to send the extension to the gateway.
 
 ## Bundling multiple extensions together
@@ -246,8 +233,10 @@ First we'll create an extension to enabled the Web Management Console and give
 it an idle timeout of four hours (14,400 seconds).
 
 Note that gateway extensions normally run in the gateway service's domain, so
-it's important to switch to the `default` domain before ocnfiguring services
+it's important to switch to the `default` domain before configuring services
 there.
+
+For this example, I placed this script as a `.cfg` file and zipped it into an archive called `web-mgmt.zip`.
 
 ```sh
 top
@@ -327,4 +316,17 @@ $> apic gateway-extensions:create manifest-extension.zip \
 
 Again, remember it may take a few minutes before the extension runs on the
 gateways.
+
+## Conclusion
+
+In this article we covered building an extension for the API Gateway with 
+examples on building custom policies as well as general configurations, and
+we bundled multiple extensions together using a `manifest.json` file. In a
+future article, we'll also cover using Kubernetes configmaps to add files to
+the gateway's local file system. 
+
+This is a good practice for any DataPower cluster that serves API Connect, but
+with DataPower for Docker on Kubernetes, it's critically important. It's the
+best way to ensure all gateways in a cluster are configured consistently, and
+to ensure new and refreshed gateways are configured quickly and correctly.
 
