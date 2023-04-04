@@ -1,0 +1,26 @@
+---
+article:
+  author: thomas
+  # active_dt: <date to activate -- use this to queue articles>
+  content_type: article
+  tags:
+    - IBM API Connect
+    - IBM DataPower Gateway
+    - Kubernetes
+    - Operations
+  permalinks:
+    - gateway-configmaps
+
+info:
+  title: Using ConfigMaps to add files to a DataPower filesystem
+  abstract:
+    format: text/markdown
+    text: |
+      Uploading files to a DataPower for Docker gateway is generally a bad idea,
+      especially if using Kubernetes. If a gateway pod restarts, as it could do
+      at any time, those files are lost. A feature of the GatewayService CRD
+      simplifies managing files on the gateway. This article shows how. 
+  article:
+    format: text/markdown
+    file: gateway-configmaps.md
+

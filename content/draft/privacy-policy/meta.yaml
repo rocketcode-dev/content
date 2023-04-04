@@ -1,0 +1,18 @@
+---
+article:
+  author: thomas
+  content_type: article
+  tags: []
+  permalinks:
+    - privacy-policy
+  active_dt: 1664034654452
+  hidden: true
+info:
+  title: Privacy Policy
+  abstract:
+    format: text/plain
+    text: ''
+  article:
+    format: text/markdown
+    file: privacy-policy.md
+  name: privacy-policy

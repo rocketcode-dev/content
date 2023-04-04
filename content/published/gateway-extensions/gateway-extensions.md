@@ -49,16 +49,12 @@ To do this, I have a policy chain with two steps:
 nefarious users, and
 2. Run a GatewayScript to perform the authentication and set the headers.
 
-I need to build a script that would run in the DataPower CLI. This is a file
-with the `.cfg` extension. You may view my example in its entirety here:
-[my-basic-auth.cfg](/posted/gateway-extensions/example-1/my-basic-auth.cfg).
+I need to build a script that would run in the DataPower CLI. For this example,
+I used two files, a `.cfg` which defined the extension, and an attached 
+gatewayscript:
 
-> 🧑‍💻 Tip:
-> 
-> Access the DataPower CLI with:
-> ```
-> kubectl attach -it <pod_name>
-> ```
+* [my-basic-auth.cfg](/posted/gateway-extensions/example-1/my-basic-auth.cfg)
+* [basic-authentication.js](/posted/gateway-extensions/example-1/basic-authentication.js)
 
 ### Redact Policy
 
@@ -99,6 +95,10 @@ exit
 > 
 > Note that this is `attach`, not `exec`. Using `exec` accesses the Linux
 > operating system.
+>
+> Unattach from the gateway's console with `ctrl-P ctrl-Q`. Do not use
+> `ctrl-C` because that will end the console causing the pod to crash and
+> restart.
 
 ### GatewayScript Policy
 
@@ -236,9 +236,11 @@ Note that gateway extensions normally run in the gateway service's domain, so
 it's important to switch to the `default` domain before configuring services
 there.
 
-For this example, I placed this script as a `.cfg` file and zipped it into an archive called `web-mgmt.zip`.
+For this example, I placed this script below in a `.cfg` file
+([web-mgmt.cfg](/posted/gateway-extensions/example-2/web-mgmt.cfg)) and zipped it
+into an archive called `web-mgmt.zip`.
 
-```sh
+```
 top
 configure terminal
 domain default
@@ -319,14 +321,7 @@ gateways.
 
 ## Conclusion
 
-In this article we covered building an extension for the API Gateway with 
-examples on building custom policies as well as general configurations, and
-we bundled multiple extensions together using a `manifest.json` file. In a
-future article, we'll also cover using Kubernetes configmaps to add files to
-the gateway's local file system. 
+In this article we covered building an extension for the API Gateway with  examples on building custom policies as well as general configurations, and we bundled multiple extensions together using a `manifest.json` file. In a [another article](/posted/gateway-configmaps), we also cover using Kubernetes configmaps to add files to the gateway's local file system. 
 
-This is a good practice for any DataPower cluster that serves API Connect, but
-with DataPower for Docker on Kubernetes, it's critically important. It's the
-best way to ensure all gateways in a cluster are configured consistently, and
-to ensure new and refreshed gateways are configured quickly and correctly.
+This is a good practice for any DataPower cluster that serves API Connect, but with DataPower for Docker on Kubernetes, it's critically important. It's the best way to ensure all gateways in a cluster are configured consistently, and to ensure new and refreshed gateways are configured quickly and correctly.
 

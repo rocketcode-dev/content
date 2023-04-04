@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-mgmt-cfg
+data:
+  web-mgmt.cfg: |
+    top
+    switch domain default
+    configure terminal
+
+    web-mgmt
+      admin-state enabled
+      idle-timeout 14400
+    exit

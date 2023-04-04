@@ -175,7 +175,7 @@ class Message {
     options = options ? { ... options } : {};
     if (!options.type) {
       let extension = path.extname(file);
-      options.type = extensions[extension];
+      options.type = extensions[extension] || 'text/plain';
       if (!options.type) {
         const message = 'type not specified and could not determine from ' +
           `extension for file "${file}"`;

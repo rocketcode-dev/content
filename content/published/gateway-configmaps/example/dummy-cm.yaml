@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dummy-cfg
+data:
+  dummy.cfg: |
+    # this is a cfg file
