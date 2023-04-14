@@ -1,0 +1,23 @@
+---
+article:
+  author: thomas
+  # active_dt: <date to activate -- use this to queue articles>
+  content_type: article
+  tags:
+    - IBM API Connect
+    - IBM DataPower Gateway
+    - Operations
+    - DevOps
+  permalinks:
+    - the-installed-extension
+info:
+  title: Inspecting the Installed Extension
+  abstract:
+    format: text/markdown
+    text: |
+      Viewing a gateway extension as it is installed in API Connect and
+      checking its installed status in the gateway.
+  article:
+    format: text/markdown
+    file: the-installed-extension.md
+
