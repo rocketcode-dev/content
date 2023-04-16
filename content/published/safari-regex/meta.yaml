@@ -1,0 +1,12 @@
+---
+article:
+  author: thomas
+  content_type: rocket
+  tags:
+    - JavaScript
+info:
+  abstract:
+    format: text/plain
+    text: >
+      Safari doesn’t support regular expressions with lookbehind assertions
+  name: safari-regex

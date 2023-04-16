@@ -1,0 +1,19 @@
+---
+article:
+  author: thomas
+  content_type: article
+  tags:
+    - Security
+    - Kubernetes
+  permalinks:
+    - ingress-to-secure-backend
+info:
+  title: Secure Ingress to a secure backend
+  abstract:
+    format: text/plain
+    text: >
+      Frustratingly the cause of the Ingress problems are not clear, especially when attempting to connect it to a secure backend.
+  article:
+    format: text/markdown
+    file: ingress-to-secure-backend.md
+  name: ingress-to-secure-backend
