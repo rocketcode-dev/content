@@ -10,6 +10,7 @@ article:
   permalinks:
     - every-api-connect
   active_dt: 1664034654621
+  featured: true
 info:
   title: Things every API Connect installation should have
   abstract:
