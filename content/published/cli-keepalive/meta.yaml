@@ -1,0 +1,16 @@
+---
+article:
+  author: thomas
+  content_type: rocket
+  tags:
+    - Linux
+    - Scripting
+    - Usability
+info:
+  title: >
+    When your CLI app/script has a long-running process on an interactive terminal, keep some movement on the screen.
+  abstract:
+    format: text/plain
+    text: >
+      Examples are spinners, progress bars, verbose logging, gratuitous telemetry. It’s not just an anxiety-killer: it prevents SSH sessions without keepalive enabled from dropping.
+  name: cli-keepalive

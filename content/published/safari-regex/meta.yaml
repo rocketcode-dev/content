@@ -5,8 +5,10 @@ article:
   tags:
     - JavaScript
 info:
+  title: >
+    Safari doesn’t support regular expressions with zero-width lookbehind assertions
   abstract:
     format: text/plain
     text: >
-      Safari doesn’t support regular expressions with lookbehind assertions
+      Chromium browers support them, but Safari will throw an exception if it encounters one.
   name: safari-regex
