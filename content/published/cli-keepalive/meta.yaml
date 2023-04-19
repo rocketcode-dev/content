@@ -12,5 +12,5 @@ info:
   abstract:
     format: text/plain
     text: >
-      Examples are spinners, progress bars, verbose logging, gratuitous telemetry. It’s not just an anxiety-killer: it prevents SSH sessions without keepalive enabled from dropping.
+      Examples are spinners, progress bars, verbose logging, and gratuitous telemetry. It’s not just an anxiety-killer: it prevents SSH sessions without keepalive enabled from dropping.
   name: cli-keepalive
