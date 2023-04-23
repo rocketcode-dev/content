@@ -1,0 +1,17 @@
+---
+article:
+  author: thomas
+  content_type: rocket
+  # Feature needed: No "important" tags
+  tags:
+    - Motivation
+    - Programming
+    - Scripting
+info:
+  title: >
+    We all write code we’re not proud of, usually when using unfamiliar tools, not everything will be perfect.
+  abstract:
+    format: text/plain
+    text: >
+      Never be too ashamed to show it off. Bad code that works is still useful code. It’s always easier to rewrite someone’s bad code than to start from zero.
+  name: bad-code

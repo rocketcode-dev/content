@@ -1,0 +1,19 @@
+---
+article:
+  author: thomas
+  content_type: rocket
+  tags:
+    - Kubernetes
+    - Operations
+    - Usability
+info:
+  title: >
+      Kubernetes cronjobs should trigger the process, not be the process. 
+  abstract:
+    # Feature needed: markdown content type
+    format: text/markdown
+    text: >
+      Put the actual job in a pod, then use the cronjob to call to it. It makes two things easier: 
+      1. starting the job on-demand, and
+      2. preventing two instances of the job from running at the same time.
+  name: kubernetes-cron

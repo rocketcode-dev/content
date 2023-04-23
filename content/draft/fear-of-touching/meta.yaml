@@ -1,0 +1,17 @@
+---
+article:
+  author: thomas
+  content_type: rocket
+  # Feature needed: No "important" tags
+  tags:
+    - Motivation
+    - Programming
+    - Scripting
+info:
+  title: >
+    The more you fear touching a module, the more that module needs touching.
+  abstract:
+    format: text/plain
+    text: >
+      By “touching” I mean scrapping and rewriting.
+  name: fear-of-touching
