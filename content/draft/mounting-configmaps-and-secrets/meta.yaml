@@ -1,0 +1,17 @@
+---
+article:
+  author: thomas
+  content_type: cheat
+  tags:
+    - Kubernetes
+  permalinks:
+    - mounting-volumes
+
+info:
+  title: "Mounting Volumes in Kubernetes"
+  abstract:
+    format: text/plain
+    text: Quick references on mounting volumes in Kubernetes
+  article:
+    format: text/markdown
+    file: mounting-volumes.md

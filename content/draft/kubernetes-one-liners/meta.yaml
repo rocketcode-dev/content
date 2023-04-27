@@ -1,0 +1,18 @@
+---
+article:
+  author: thomas
+  content_type: cheat
+  tags:
+    - Kubernetes
+    - Linux
+  permalinks:
+    - kubernetes-one-liners
+
+info:
+  title: "Kubernetes One-Liners"
+  abstract:
+    format: text/plain
+    text: Some one-line shell commands I use for Kubernetes work
+  article:
+    format: text/markdown
+    file: kubernetes-one-liners.md
