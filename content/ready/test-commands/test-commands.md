@@ -9,6 +9,7 @@ Full reference: https://www.computerhope.com/unix/bash/test.htm
 
 * `[ -d directory ]` file is a directory
 * `[ -e filename ]` file exists
+* `[ -s filename ]` file exists and is non-empty
 * `[ -f filename ]` file exists and is a regular file
 * `[ -h filename ]` file exists and is a symbolic link (`-L` also does this)
 * `[ -r filename ]` file is readable

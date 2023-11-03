@@ -1,0 +1,27 @@
+---
+article:
+  author: thomas
+  content_type: article
+  tags:
+    - Security
+    - Motivation
+  permalinks:
+    - quantum-safe
+  featured: true
+info:
+  title: 'Security in a post-quantum world'
+  abstract:
+    format: text/plain
+    text: >
+      Quantum is a major breakthrough in science and technology that can be
+      applied to solve a lot of previously unreachable problems. But it also has
+      the potential to turn the world of IT security upside down. We don't yet
+      have to worry about thousand-qubit quantum computers that can break crypto
+      keys, but we will soon. In this article, we'll look at quantum's
+      implications for securing your business, how to plan for this inevitable
+      change, and what we can do right now to protect your business from a
+      severe headache later.
+  article:
+    format: text/markdown
+    file: quantum-safe.md
+  name: quantum-safe

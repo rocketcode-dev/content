@@ -114,8 +114,8 @@ In my case, I am using a shell script to patch the API. Use a kubernetes secret 
 
 ## Conclusion
 
-We covered how to 
+We covered how to:
+
 * Create a service account and give it access to your resources,
 * How to run a pod using a service account, and
 * How to access the Kubernetes API server from within a pod.
-

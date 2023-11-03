@@ -1,0 +1,23 @@
+---
+article:
+  author: thomas
+  content_type: article
+  tags:
+    - Kubernetes
+    - Operations
+    - High Availability
+    - Sire Reliability
+  permalinks:
+    - every-kubernetes-app
+  featured: true
+info:
+  title: Things every Kubernetes application should have
+  abstract:
+    format: text/plain
+    text: >
+      Make your Kubernetes application more stable and reliable for your users
+      by following these practices
+  article:
+    format: text/markdown
+    file: every-kubernetes-app.md
+  name: every-kubernetes-app

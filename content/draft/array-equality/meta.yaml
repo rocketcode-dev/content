@@ -6,7 +6,7 @@ article:
     - JavaScript
 info:
   title: >
-    JavaScript's == equality operator's type conversion feature can have "interesting" implications:
+    JavaScript's == equality operator's type conversion feature can have "interesting" implications
   abstract:
     # Feature needed: markdown in rockets
     format: text/markdown

@@ -1,0 +1,28 @@
+---
+article:
+  author: thomas
+  content_type: article
+  tags:
+    - Programming
+    - Scripting
+    - Motivation
+    - Security
+  permalinks:
+    - rules-like-a-pro
+  featured: true
+info:
+  title: '"Learn the rules like a pro, so you can break them like an artist"'
+  abstract:
+    format: text/plain
+    text: >
+      Countless variations of this famous Pablo Picasso quote have appeared in
+      various places. Sometimes the "rules" are really just bad habits passed
+      from generation to generation, occasionally they are disrupted by a
+      changing landscape, but usally they emerge from years, decades, or even
+      centuries of experience. It's hard to know the difference. Usually there's
+      a rule that applies to your situation, sometimes there isn't. Again, it's
+      hard to know the difference. Mastering the rules is a lifelong endeavor.
+  article:
+    format: text/markdown
+    file: rules-like-a-pro.md
+  name: rules-like-a-pro

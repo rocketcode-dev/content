@@ -1,0 +1,17 @@
+---
+bylines:
+  - type: text/html
+    text: |2
+      <p>
+        Thomas Wilkinson has over 25 years of professional experience in
+        platforms ranging from mobile devices to big iron.
+      </p>
+      <small id="ibm-employee">
+        Disclosure: Thomas Wilkinson is an employee of <a
+        href="https://www.ibm.com">IBM Corporation</a>. Some content on this
+        site discusses IBM products and projects that IBM may have a strategic
+        interest in. The opinions regarding these and all other products,
+        projects, and issues on this site are Thomas Wilkinson&apos;s alone.
+        Thomas Wilkinson does not speak on IBM&apos;s behalf and IBM does not
+        direct, fund, or influence the content on this site.
+      </small>
