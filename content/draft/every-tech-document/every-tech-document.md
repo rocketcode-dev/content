@@ -80,7 +80,9 @@ A high-value metaphor is one that changes the user's thinking.
 
 * The "cattle not pets" metaphor that emerged in the early 2010s made us view servers something that should be expendable and replacable, not precious and unique.
 
-### A few side notes on grammar
+### A few side notes on regional grammar
+
+#### Regional language
 
 There are many regional variations of the English language. I wrote this article in Canadian English, which is a weird combination of British spellings of American words. As long as you're using plainspeak, you're unlikely to be misunderstood by someone that prefers a different variant of English than you do.
 
@@ -88,6 +90,22 @@ There are two exceptions to this though:
 
 1) When there are multiple authors, they should be writing with one voice. That means one dialect.
 2) Code examples must always use American English. No exceptions. Any non-American spellings will cause confusion there.
+
+#### Quoted text
+
+Both the AP Style Guide and the Chicago Manual of Style recommend putting periods and commas within quotes, even if they are not part of the quote.
+
+```
+My brother said "You need to get a haircut," but I didn't agree.
+```
+
+In technical documentation this is confusing, especially if you need to type the exact contents into code or a command. Only things that are part of the actual quote should be there.
+
+```
+You may add a line break after "if [ -e ${file} ]; then", but it's not necessary
+```
+
+There's no ambiguity as to what is inside the quote when you use this style. A `monospace code style` can also be useful for quoting without worrying about quotation style.
 
 ## How to use examples
 
