@@ -1,0 +1,23 @@
+---
+article:
+  author: thomas
+  content_type: article
+  tags:
+    - Kubernetes
+    - Operations
+    - High Availability
+    - Sire Reliability
+  permalinks:
+    - every-tech-document
+  featured: true
+info:
+  title: Things every technical document should have
+  abstract:
+    format: text/plain
+    text: >
+      Make your technical documentation more usable and accessibe to your users
+      by following these best practices
+  article:
+    format: text/markdown
+    file: every-tech-document.md
+  name: every-tech-document

@@ -21,7 +21,7 @@ What happens when something goes wrong? Normally when a service is operating poo
 
 Well, no. If the pod is `CrashLoopBackoff` you cannot `exec` in. And what if you're not in the office the day it crashed? Does your backup know the system as well as you do? Are you sure? Would you remember where everything is six months later? Would your backup remember what you told them six months ago?
 
-What would you do if you had to disgnose an issue with a service you are only vaguely familiar with? Well, the first thing I would do is look at the `Deployment` for that service. What are the environment variables, and what are its volume mounts? From this I would know which config maps hold its configuration, and then I can read through them, cross reference it to the pod logs or events, and that would take me closer to the solution.
+What would you do if you had to diagnose an issue with a service you are only vaguely familiar with? Well, the first thing I would do is look at the `Deployment` for that service. What are the environment variables, and what are its volume mounts? From this I would know which config maps hold its configuration, and then I can read through them, cross reference it to the pod logs or events, and that would take me closer to the solution. This is far easier if the configs are exposed rather than buried in the image.
 
 ### Familiarity
 

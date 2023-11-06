@@ -6,7 +6,7 @@ article:
     - Kubernetes
     - Operations
     - High Availability
-    - Sire Reliability
+    - Site Reliability
   permalinks:
     - every-kubernetes-app
   featured: true
