@@ -36,7 +36,7 @@ The metaphor is inescapable. Good metaphors add clarity and levity to your artic
 
 ### Avoiding offence
 
-What is "offensive" is often a topic for debate so I'm not going to repeat them here, but I want to make a few points:
+What is "offensive" is often a topic for debate and many an article has been written on this topic, so I'm not going to repeat them here, but I do want to make a few points:
 
 1. There's no reason to be edgy or risqué in a technical document, so there's no reason to establish the boundary between risqué and icky. If you're anywhere near that boundary, you might as well be over it.
 2. If it sounds racist, it is racist. A word sounds close to a bad word, treat it like the bad word. If a phrase is an obvious rewording of a naughty phrase, it is the naughty phrase implied.
@@ -49,11 +49,13 @@ Some words common in technology that have fallen out of favour:
 * Slave -- better to use secondary, copy, duplicate, redundant node, worker, follower
 * Grandfathered -- term has racist origins, so it's better to say "legacy status" or "exempt"
 
-Because these problematic terms were widely used in established technologies, they aren't always avoidable. Most long-standing server packages have now established synonyms, but the original word remains for backwards compatibility. Don't sweat it: clarity is also inclusivity. If a synonym is now available, favour it but include a short explanation, e.g. "In version 9.11.0, BIND 9 added 'primary' and 'secondary' as synonyms to 'master' and 'slave'."
+Because these problematic terms have been widely used in established technologies for decades, they aren't always avoidable.
+
+Most long-standing software packages now have established synonyms, but the original word is still widely used and remains for backwards compatibility. Favour the inclusive language, and include a short explanation, e.g. "In version 9.11.0, BIND 9 added 'primary' and 'secondary' as synonyms to 'master' and 'slave'."
 
 ### Idiomatic is not inclusive
 
-Imagine seeing a document peppered with references to American Football, 1980s Bill Murray's movie quotes, and measures in miles and fahrenheit. Then another doument peppered with Cricket references, Dev Anand movie quotes, and numbers in lakh and crore.
+Imagine seeing a document peppered with references to American Football, 1980s Bill Murray movie quotes, and measures in miles and fahrenheit. Then another doument peppered with Cricket references, Dev Anand movie quotes, and numbers in lakh and crore.
 
 Chances are, one of those documents is going to be confusing to you. For some readers, both will be.
 
@@ -64,11 +66,11 @@ Metahpores are guaranteed not be understood everywhere:
 * Biblical references - just... don't, and
 * Pop culture - I could make a whole career on _Ghostbusters_ and Monty Python references, but nobody too young or too far away will understand it.
 
-In fact, there really aren't any universal metaphores out there. This is not to say "don't use metaphors". Metaphors are inescapable in our industry. Instead, think of metaphores as an expensive, so make them count. Metaphores that aren't worth explaining aren't worth using.
+In fact, there really aren't any universal metaphores out there. This is not to say "don't use metaphors". Metaphors are inescapable in our industry. Instead, think of metaphores as an expensive power-up, so make them count. Metaphores that aren't worth explaining aren't worth using.
 
 ### When a metaphor is worth using
 
-For a metaphor to be worth it, it needs to have either a low cost or a high value.
+For a metaphor to be worth using, it needs to have either a low cost or a high value.
 
 A low-cost metaphor is one that is already well-known by your audience or that's fun and mostly meaningless
 
@@ -80,7 +82,15 @@ A high-value metaphor is one that changes the user's thinking.
 
 * The "cattle not pets" metaphor that emerged in the early 2010s made us view servers something that should be expendable and replacable, not precious and unique.
 
-### A few side notes on regional grammar
+### A few side notes on grammar and readable language
+
+#### Passive voice
+
+Every action has an actor, so name the actor. Passive tense is not a problem if you use it judiciously, but it's easily overused.
+
+Avoiding it is sometimes difficult though. One common crutch is to add "the user" as the subject of every sentance. Saying "the user... the user ... the user" quickly gets repetitive and awkward though.
+
+I have chosen to write this article in the first person. I am writing to you. This is not something I commonly do or encourage, but it does have its benefits. It sounds more personal and it makes it easier to avoid the passive voice.
 
 #### Regional language
 
@@ -88,8 +98,8 @@ There are many regional variations of the English language. I wrote this article
 
 There are two exceptions to this though:
 
-1) When there are multiple authors, they should be writing with one voice. That means one dialect.
-2) Code examples must always use American English. No exceptions. Any non-American spellings will cause confusion there.
+1) When there are multiple authors, they should write with one voice. That means one dialect.
+2) Write code examples in American English. No exceptions. Any non-American spellings will cause confusion there.
 
 #### Quoted text
 
