@@ -23,7 +23,7 @@ kubectl logs --selector=app=my-api-application --tail=-1 -t
 The `kubectl exec` doesn't support the `--selector` option _per se_ but you can still use it by wrapping it in another command
 
 ```sh
-kubectl exec -it $(kubectl get pods --selecor=app=my-api-application -o name) -- sh
+kubectl exec -it $(kubectl get pods --selector=app=my-api-application -o name) -- sh
 ```
 
 ## Monitoring

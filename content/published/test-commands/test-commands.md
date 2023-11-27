@@ -26,8 +26,8 @@ Full reference: https://www.computerhope.com/unix/bash/test.htm
 
 * `[ -n "${string}" ]` string is not empty (the `-n` is optional)
 * `[ -z "${string}" ]` string is empty
-* `[ ${string1} \< ${string2} ]` string1 sorts before string2
-* `[ ${string1} \> ${string2} ]` string1 sorts after string2
+* `[ ${string1} < ${string2} ]` string1 sorts before string2
+* `[ ${string1} > ${string2} ]` string1 sorts after string2
 
 ## numbers
 

@@ -3,10 +3,9 @@ article:
   author: thomas
   content_type: article
   tags:
-    - Kubernetes
     - Operations
-    - High Availability
-    - Sire Reliability
+    - Usability
+    - Motivation
   permalinks:
     - every-tech-document
   featured: true

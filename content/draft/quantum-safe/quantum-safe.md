@@ -1,6 +1,5 @@
 # Security in a post-quantum world
 
-
 Quantum can
 
 * Break an asymmetric key (shor's algorithm) (NIST quantum-safe keys)

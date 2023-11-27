@@ -19,9 +19,9 @@ This has many benefits:
 
 What happens when something goes wrong? Normally when a service is operating poorly, you can `exec` into the pod and see what's in the file system. You know where all the files are and what they mean, so you can review it, respin your image and push it to your registry right? Right?
 
-Well, no. If the pod is `CrashLoopBackoff` you cannot `exec` in. And what if you're not in the office the day it crashed? Does your backup know the system as well as you do? Are you sure? Would you remember where everything is six months later? Would your backup remember what you told them six months ago?
+Well, no. If the pod is in `CrashLoopBackoff` status, `exec` doesn't work. And what if you're not in the office the day it crashed? Does your backup know the system as well as you do? Are you sure? Would you remember where everything is six months later? Are you sure? Would your backup remember what you told them six months ago? Are you sure?
 
-What would you do if you had to diagnose an issue with a service you are only vaguely familiar with? Well, the first thing I would do is look at the `Deployment` for that service. What are the environment variables, and what are its volume mounts? From this I would know which config maps hold its configuration, and then I can read through them, cross reference it to the pod logs or events, and that would take me closer to the solution. This is far easier if the configs are exposed rather than buried in the image.
+What would you do if you had to diagnose an issue with a service you are only vaguely familiar with? Probably look at the `Deployment` for that service. What are the environment variables? What are its volume mounts? From this I would know which config maps hold its configuration, and then I can read through them, cross reference it to the pod logs or events, and that would take me closer to the solution. This is far easier if the configs are exposed rather than buried in the image.
 
 ### Familiarity
 
@@ -29,11 +29,26 @@ Generally official images are well-documented and well-understood, rebuilt image
 
 ### Less Infrastructure to maintain
 
-Avoiding a unnecessary container builds also means fewer images in your container registry, fewer updates to cull when your registry's disk quota fills up, and less chance of accidentally culling a build still in use.
+Avoiding unnecessary container builds also means fewer images in your container registry, fewer updates to cull when your registry's disk quota fills up, and less chance of accidentally culling an image still in use.
 
 If you're using an official image, it's easier to pick up security updates and there's one less pull secret to keep up to date. Also you can set your `imagePullPolicy` to `IfNotPresent` leading to fewer registry pulls and quicker startup times.
 
 In general, standard images are less burden for both you and your servers.
+
+## When to build a new image
+
+Of course, there are situations where building a new image is, in fact, appropriate. Here are some advantages:
+
+* Image layers can have more complex data and larger size than a config map.
+* Tagged images are also snapshots of the state of your code at specific moments in time, and it's easier to step back to an old build by specifying an image tag.
+* The apparent atomicity of images makes them easier to distribute and document.
+
+In a perfect world, and image should do two things:
+
+1) Run in a test environment with no added configuration, and
+2) Move between environments changing only configuration files using config maps and secrets.
+
+Most of the official images fit both of those requirements.
 
 ## A `healthz` endpoint
 

@@ -4,7 +4,7 @@ Communicating effectively is hard. Especially when you're writing for people you
 
 ## Establish your purpose early
 
-Time is a valuable asset. Sometimes people need to get their information quickly, and they need to quickly determine if a document will answer their questions. Nobody likes to scroll through pages of content to find that what they were looking for isn't there.
+Time is a valuable asset. Sometimes people need to get their information quickly, and they need to quickly decide if a document will answer their questions. Nobody likes to scroll through pages of content to find that what they were looking for isn't there.
 
 Help the user assess the applicability of your content quickly by telling them what the article is about and who the intended audience is.
 
@@ -12,13 +12,11 @@ Remember, your purpose is to inform your reader, and leave them feeling satisfie
 
 ## Make your presentation readable
 
-
-
-One of the big differences between writing for a screen vs for print is that there is no physical means to interact with the text. I can't put my finger on a page to mark my place or put little notes in the margin, or underline an important passage of text. Often, there are visual distractions, like animated ads, related links, or sponsored content. We need to be exceptionally conscientious about how we guide the user's eyes on the page.
+One of the big differences between writing for a screen vs for print is that there is no physical means to interact with the text. I can't put my finger on a page to mark my place or put little notes in the margin, or underline an important passage of text. Often, there are visual distractions, like animated ads, related links, or sponsored content. We need to be conscientious about how we guide the user's eyes on the page.
 
 Long continuous blocks of text are difficult to read, especially on a screen. Break it up. Paragraphs should be short and there should be a space between paragraphs. Keep the line lengths short.
 
-If you can, provide features to help the user interact with your content. Some people, myself included, like to highlight the line of text they are reading. Respect that. Use the `<abbr/>` tag to expand acronyms and folding text to clarify details.
+If you can, provide features to help the user interact with your content. Some people, myself included, like to highlight text as they read it. Use the `<abbr/>` tag to expand acronyms and folding text to clarify details.
 
 ### Colour
 
@@ -26,27 +24,27 @@ Colour can also be a useful tool for enhancing readability and making your artic
 
 Colour blindness is common in our industry. Colour can also be difficult to see in a projecter image or in a brightly-lit room. Therefore, colour cannot be the sole source of meaning. Instead, use colour as a progressive enhancement. Make things that are already readable without colour even more readable.
 
-For example, when my site has `inline code`, it uses a monospace font, but also it changes the colour. The primary indication that this is `inline code` is the monospace font. I add a pop of colour make it more more visible.
+For example, when my site has `inline code`, it uses a monospace font, but also it changes the colour. The monospace font indicates `inline code`; a pop of colour make it more visible.
 
-Little pops of colour can be used all over a site to enhance readability and make it more appealing. For example, some of my article tags are colour-coded to make them easier to spot. Pull quotes have a light blue background. The colour isn't the indicator of the pull-quote, but it adds appeal and readability.
+Little pops of colour can enhance readability and make it more appealing in a lot of places. For example, some of my article tags are colour-coded to make them easier to spot. Pull quotes have a light blue background. The colour isn't the indicator of the pull-quote, but it adds appeal and readability.
 
-Colour can be used to emphasize, but it can also be used to de-emphasize. For decades, grey text has been used to indicate disabled features, and most programming editors show code comments in green italics. On many web sites, legalese is shown in a slightly fainter colour than content. Sometimes the best way to emphasize the important stuff is to de-emphasize the unimportant stuff.
+Colour can emphasize, but it can also de-emphasize, and it can emphasize by de-emphasizing. For decades, grey text has shown disabled features, and most programming editors show code comments in green italics. On many web sites, legalese text has slightly fainter colour than content. It makes the less-important information available, but it directs your eyes to what is important.
 
 Be careful about bold colours near text. Some colour combinations are nauseating and difficult to focus on. For example, red and blue light, because they are at opposite ends on the visible spectrum, behave differently as they pass through your eye's lenses, one has a shorter focal length than the other. Blue pixels appear slightly closer to you than the red. This is what gives pink and magenta their pop, but it also makes blue on red or anything on pink difficult to read.
 
-Some people find certain colour combinations nauseating. Avoid using bright yellow backgrounds. Some people also find switching between light on dark and dark on light bothersome. Flashing lights can literally cause a seizure. Thus, it's best to stick with black text on a light background or white text on a dark background for most of your body text.
+Some people find certain colour combinations nauseating. Avoid using bright yellow backgrounds. Some people also find switching between light on dark and dark on light bothersome. Flashing lights can literally cause a seizure. It's best to stick with black text on a light background or white text on a dark background for most of your body text.
 
 ## On metaphors
 
-Our industry revolves around metaphors. We spend our entire careers building things that nobody can actually see or touch, and then explain their tanguble benefits using a language that formed long before the invention of the transistor.
+Our industry revolves around metaphors. We spend our entire careers building things that nobody can see or touch, and then explain their tanguble benefits using a language that formed long before the invention of the transistor.
 
 Metaphors are inescapable. Good metaphors add clarity and levity to your article, bad metaphors can make your document confusing or offensive.
 
 ### Avoiding offence
 
-What is "offensive" is often debatable and many an article has been written on this topic, so I'm not going to repeat them here. And I do not consider myself an expert on race relations. I do want to make a few points specific to technology documents though:
+What is "offensive" is often debatable and many others have already written many articles on this topic, so I'm not going to repeat them here. I do not consider myself an expert on race relations, but I do want to make a few points specific to technology documents though:
 
-1. There's no reason to be edgy or risqué in a technical document, so there's no reason to establish the boundary between risqué and icky. If you're anywhere near that boundary, you might as well be over it.
+1. There's no reason to be edgy or risqué in a technical document, so there's no reason to seek the boundary between risqué and icky. If you're anywhere near that boundary, you might as well be over it.
 2. If it sounds racist, it is racist. A word sounds close to a bad word, it is the bad word. If a phrase is an obvious rewording of a problematic cliché, it's no different from saying the original cliché.
 3. Plain language is inclusive language. Clichés, especially dated clichés, will confuse people who learned English as an adult.
 
@@ -65,14 +63,14 @@ Imagine seeing a document peppered with references to American Football, 1980s B
 
 Chances are, one of those documents is going to be confusing to you. For some readers, both will be.
 
-Metahpores are guaranteed not be understood everywhere:
+Certain types of metaphores do not travel well. Some examples:
 
-* Sports - no sport is popular and well-understood everywhere, and many of your own countrymen may not pay much attention sports at all,
+* Sports - no sport is popular and well-understood everywhere, not even curling, and many of your own countrymen may not pay much attention sports at all,
 * Literature - nobody who learned English as an adult will have studied English literature in high school, and some politically-charged works like George Orwell's _Nineteen Eighty-Four_ may have been banned or discouraged at some times in some countries,
 * Biblical references - scripture has the same problem as any other politically-charged literature, and
 * Pop culture - I could make a whole career on _Ghostbusters_ and Monty Python references, but nobody too young or too far away will understand it.
 
-In fact, there really aren't very many universal metaphores out there. This is not to say "don't use metaphors". Metaphors are inescapable in our industry. Instead, think of metaphores as an expensive power-up, so make them count. Metaphores that aren't worth explaining aren't worth using.
+In fact, there aren't many universal metaphores out there. This is not to say "don't use metaphors". Metaphors are inescapable in our industry. Instead, think of metaphores as an expensive power-up, so make them count. Metaphores that aren't worth explaining aren't worth using.
 
 ### When a metaphor is worth using
 
@@ -111,17 +109,40 @@ There are two exceptions to this though:
 
 Both the AP Style Guide and the Chicago Manual of Style recommend putting periods and commas within quotes, even if they are not part of the quote.
 
-```plain text
+```prose
 My brother said "You need to get a haircut," but I didn't agree.
 ```
 
-In technical documentation this is confusing, especially if you need to type the exact contents into code or a command. Only things that are part of the actual quote should be there.
+In technical papers this is confusing, especially if you need to type the exact contents into code or a command. Only things that are part of the actual quote should be there.
 
-```plain text
+```prose
 You may add a line break after "if [ -e ${file} ]; then", but it's not necessary
 ```
 
-There's no ambiguity as to what is inside the quote when you use this style. A `monospace code style` can also be useful for quoting without worrying about quotation style.
+In this style, what is inside the quote is unambiguous. A `monospace code style` can also be useful for quoting without worrying about quotation style.
+
+#### Filler words
+
+If a sentance makes sense with a word removed, strike it out. Many filler words are a feeble attempt to strengthen a sentence, but they rarely do. Take this example:
+
+```prose
+It is very likely to fail
+```
+
+The `very` is pointless filler. There's a famous quote from the 1989 film _Dead Poets Society_, where John Keating says (Robin Williams) says "Avoid using the word ‘very’ because it’s lazy. A man is not very tired, he is exhausted. Don’t use very sad, use morose. Language was invented for one reason, boys – to woo women – and, in that endeavor, laziness will not do."
+
+Technical documents were not invented to woo women. They're written to share knowledge, to raise your profile, to expand your customer base and to increase your customers' satisfaction. Tech docs were invented to woo money. _\[Editorial note: Notorious B.I.G. quotes are outside the scope of this article.\]_
+
+To update the movie quote: A man is not very tired. He's tired. He's not very sad, he's sad. It's not laziness, it's brevity, brevity is clarity, and clarity is usability. Because what's the difference between "likely to fail" and "very likely to fail" anyway? You need to take the same action.
+
+Some more examples of filler words:
+
+* To break a line, `just` add a backslash at the `very` end of the line.
+* Hardcoding API keys is `really` not a good practice.
+* The compiled image is the same; the config is `only` applied at runtime.
+* Despite the strong correlation, there's `clearly` no causal relationship.
+
+Get rid of them. They add nothing.
 
 ## How to use examples
 
@@ -132,13 +153,13 @@ When providing an example, it's important that the user knows two things:
 
 The latter requires context, but context obscures the former.
 
-Nothing is more frustrating than being told to add two lines of config text, but I have no idea where and in what file. At the same time, context can get noisy and distracting from the main point of the example.
+Nothing is more frustrating than a doc showing two lines of config text, but I have no idea where and in what file. At the same time, too much context can get noisy and distracting from the main point of the example.
 
-Also very frustrating is when the example you have is so simple that you don't know how to extend it to the real world.
+Also frustrating is when the example you have is so simple that you don't know how to extend it to the real world.
 
-Many years ago, I created a [tutorial](https://github.com/appcelerator-archive/ElementsOfListView) for a scrolling list UI element on a mobile platform that was confusing many of my colleagues and customers. I decided to create a useful app around the UI rather than a simplest possible example, something I was initially criticized for, but it made the document more engaging and it showed the power of the element better.
+Many years ago, I created a [tutorial](https://github.com/appcelerator-archive/ElementsOfListView) for a scrolling list UI element on a mobile platform that was confusing many of my colleagues and customers. I decided to create a useful app around the UI rather than a simplest possible example, something I was criticized for, but it made the document more engaging and it showed the power of the element better.
 
-Doing this, of course required supporting code not relevant to the tutorial that I would not want to include in a PDF file, but the complete code for each chapter is in a git branch.
+The usable app required some supporting code not relevant to the tutorial, and I would not want to include it in a PDF file, but the complete code for each chapter is in a git branch.
 
 A git link is not a substitute for context in your document though. That is only asking a user to cross-reference between your snippet and the entire repository. It's both distracting and disorienting. Include enough context to tell your story, but provide a git link to allow them to see the structure as a whole and, where possible, give them some code to expiriment with.
 
@@ -146,7 +167,7 @@ A git link is not a substitute for context in your document though. That is only
 
 Your document is probably not a legal record. You can change it any time. Facts change, notice a spelling mistake, want to clarify a detail? Update it. It doesn't matter if you published it yesterday or three years ago. It's always ok to update the document.
 
-Most platforms will state the date of the last update. This date will be understood by your user as the "this document is current to" date. It's one of the things I look at when assessing if a document will meet my needs. Therefore, when updating a document from years ago, read through the document in its entirety to check if any facts have changed.
+Most platforms will state the date of the last update. Readers will understand this date as the "this document is current to" date. It's one of the things I look at when assessing if a document will meet my needs. When updating a document from years ago, read through the document in its entirety to check if any other facts have changed befor republishing it.
 
 ## Conclusion
 
