@@ -26,6 +26,8 @@ The `kubectl exec` doesn't support the `--selector` option _per se_ but you can 
 kubectl exec -it $(kubectl get pods --selector=app=my-api-application -o name) -- sh
 ```
 
+## Logs
+
 ## Monitoring
 
 I keep a terminal open with this one running at all times. It's similar to `kubectl get all` but I get to choose what `all` means and it adds a little bit of colour to the output.
